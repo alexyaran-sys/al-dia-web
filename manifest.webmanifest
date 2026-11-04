@@ -1,0 +1,15 @@
+{
+  "name": "Al Día · Gestiones de casa",
+  "short_name": "Al Día",
+  "description": "Tus gestiones de casa, siempre al día: garantías, seguros, ITV, citas médicas, medicinas y facturas explicadas. Todo en tu dispositivo.",
+  "lang": "es",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f5f3",
+  "theme_color": "#ffffff",
+  "icons": [
+    {"src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable"},
+    {"src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}
+  ]
+}

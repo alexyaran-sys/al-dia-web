@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="application-name" content="Al Día">
+<meta name="apple-mobile-web-app-title" content="Al Día">
+<meta name="theme-color" content="#ffffff">
+<meta name="description" content="Al Día · Tus gestiones de casa, siempre al día: garantías, seguros, ITV, citas médicas, medicinas y facturas explicadas. Sin cuentas ni nube: todo se queda en tu dispositivo.">
+<title>Al Día · Gestiones de casa</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preload" href="vendor/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Inter';font-style:normal;font-display:swap;font-weight:100 900;src:url(vendor/fonts/inter-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Inter';font-style:normal;font-display:swap;font-weight:100 900;src:url(vendor/fonts/inter-latin-ext-wght-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+:root{
+  --bg:#f4f5f3;--surface:#ffffff;--surface2:#f7f8f6;--ink:#141a17;--ink2:#3b4642;--mut:#6b7671;--line:#e3e6e2;
+  --pri:#1b6b52;--pri-ink:#ffffff;--priS:#e6f2ec;--pri-strong:#145340;
+  --red:#c0352b;--redS:#fdecea;--amb:#a35b00;--ambS:#fff3df;--grn:#1d7a4b;--grnS:#e4f4ea;--blu:#2457c5;--bluS:#e8eefc;--vio:#5b45c7;--vioS:#efecfc;--sla:#4a5a66;--slaS:#eceff2;--ora:#c25412;--oraS:#fdeee4;
+  --r:16px;--r-sm:11px;--sh:0 1px 2px rgba(16,24,20,.05),0 2px 8px rgba(16,24,20,.04);--sh2:0 8px 28px rgba(16,24,20,.14);
+  --tab:64px;--safe-b:var(--safe-area-inset-bottom,env(safe-area-inset-bottom,0px));--safe-t:var(--safe-area-inset-top,env(safe-area-inset-top,0px))
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0f1312;--surface:#171c1a;--surface2:#1d2321;--ink:#eef2f0;--ink2:#c9d1cd;--mut:#93a09a;--line:#2a322f;
+  --pri:#4cc497;--pri-ink:#062118;--priS:#173229;--pri-strong:#6fd6ad;
+  --red:#ff8b80;--redS:#3a1c1a;--amb:#ffc46b;--ambS:#352812;--grn:#7ed8a6;--grnS:#16302a;--blu:#8fb0ff;--bluS:#1b2540;--vio:#b5a8ff;--vioS:#251f45;--sla:#b2c0cb;--slaS:#222a30;--ora:#ffab7a;--oraS:#3a2416;
+  --sh:0 1px 2px rgba(0,0,0,.3);--sh2:0 10px 30px rgba(0,0,0,.5)}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.5 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-feature-settings:"cv11","ss01";-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit}
+svg.i{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* barra superior */
+.appbar{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);padding:calc(10px + var(--safe-t)) 16px 10px;border-bottom:1px solid transparent;transition:border-color .2s}
+.appbar.scrolled{border-bottom-color:var(--line)}
+.appbar .in{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:10px;min-height:44px}
+.brand{display:flex;align-items:center;gap:10px;flex:1}
+.brand img{width:34px;height:34px;border-radius:10px}
+.brand b{font-size:17px;letter-spacing:-.2px}
+.iconbtn{width:40px;height:40px;border-radius:12px;border:0;background:transparent;display:grid;place-items:center;cursor:pointer;color:var(--ink)}
+.iconbtn:hover{background:var(--surface2)}
+.ttl{flex:1;min-width:0}
+.ttl h1{font-size:18px;margin:0;letter-spacing:-.3px;line-height:1.2}
+.ttl p{margin:0;font-size:13px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:550;color:var(--pri);background:var(--priS);padding:6px 10px;border-radius:99px}
+.pill svg.i{width:14px;height:14px}
+
+main{max-width:760px;margin:0 auto;padding:6px 16px calc(var(--tab) + var(--safe-b) + 92px)}
+.view{display:none;animation:fade .22s ease}
+.view.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* barra inferior */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:15;background:var(--surface);border-top:1px solid var(--line);padding-bottom:var(--safe-b)}
+.tabbar .in{max-width:760px;margin:0 auto;display:flex;height:var(--tab)}
+.tabbar button{flex:1;border:0;background:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11.5px;font-weight:550;color:var(--mut);cursor:pointer;position:relative}
+.tabbar button svg.i{width:22px;height:22px}
+.tabbar button.on{color:var(--pri)}
+.tabbar button.on::before{content:"";position:absolute;top:0;width:28px;height:3px;border-radius:0 0 3px 3px;background:var(--pri)}
+.tabbar .dot{position:absolute;top:9px;left:calc(50% + 6px);min-width:16px;height:16px;padding:0 4px;border-radius:9px;background:var(--red);color:#fff;font-size:10px;line-height:16px;font-weight:700}
+
+/* componentes */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:12px;box-shadow:var(--sh)}
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;margin:22px 2px 10px}
+.sec-h h2{font-size:13px;text-transform:uppercase;letter-spacing:.7px;color:var(--mut);margin:0;font-weight:650}
+.row{display:flex;gap:12px;align-items:center}
+.grow{flex:1;min-width:0}
+.mut{color:var(--mut)}.small{font-size:13.5px}.xs{font-size:12.5px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:var(--r-sm);padding:10px 15px;font-size:15px;font-weight:550;cursor:pointer;text-decoration:none;transition:background .15s,transform .08s}
+.btn:active{transform:scale(.98)}
+.btn:hover{background:var(--surface2)}
+.btn.pri{background:var(--pri);border-color:var(--pri);color:var(--pri-ink)}
+.btn.pri:hover{background:var(--pri-strong)}
+.btn.sm{padding:7px 11px;font-size:13.5px;border-radius:10px}
+.btn.sm svg.i{width:16px;height:16px}
+.btn.ghost{border-color:transparent;background:transparent}
+.btn.ghost:hover{background:var(--surface2)}
+.btn.danger{color:var(--red)}
+.btn.block{width:100%}
+.btn:disabled{opacity:.5;cursor:default}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:650;padding:4px 9px;border-radius:99px;white-space:nowrap}
+.chip.red{background:var(--redS);color:var(--red)}.chip.amb{background:var(--ambS);color:var(--amb)}.chip.grn{background:var(--grnS);color:var(--grn)}.chip.neu{background:var(--surface2);color:var(--ink2);border:1px solid var(--line)}
+.tile{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;flex:none}
+.tile svg.i{width:22px;height:22px}
+.t-pri{background:var(--priS);color:var(--pri)}.t-blu{background:var(--bluS);color:var(--blu)}.t-ora{background:var(--oraS);color:var(--ora)}.t-vio{background:var(--vioS);color:var(--vio)}.t-sla{background:var(--slaS);color:var(--sla)}.t-amb{background:var(--ambS);color:var(--amb)}.t-red{background:var(--redS);color:var(--red)}.t-grn{background:var(--grnS);color:var(--grn)}
+
+/* inicio */
+.hero{padding:10px 2px 4px}
+.hero h2{font-size:27px;line-height:1.15;letter-spacing:-.8px;margin:6px 0 8px;font-weight:750}
+.hero p{margin:0;color:var(--ink2);font-size:15.5px}
+.status{display:flex;gap:12px;align-items:center;border-radius:var(--r);padding:14px 16px;margin:18px 0 0;border:1px solid var(--line);background:var(--surface);box-shadow:var(--sh);cursor:pointer}
+.status.warn{background:var(--ambS);border-color:transparent}
+.status.bad{background:var(--redS);border-color:transparent}
+.status b{display:block}
+.mod{display:flex;gap:14px;align-items:center;padding:16px;cursor:pointer;transition:transform .1s,box-shadow .15s;text-align:left;width:100%;border:1px solid var(--line);background:var(--surface);border-radius:var(--r);box-shadow:var(--sh);margin-bottom:10px}
+.mod:hover{box-shadow:var(--sh2)}
+.mod:active{transform:scale(.99)}
+.mod .tile{width:52px;height:52px;border-radius:15px}
+.mod .tile svg.i{width:26px;height:26px}
+.mod h3{margin:0 0 2px;font-size:16.5px;letter-spacing:-.2px}
+.mod p{margin:0;color:var(--mut);font-size:14px;line-height:1.4}
+.mod .meta{margin-top:7px;font-size:12.5px;font-weight:600;color:var(--ink2);display:flex;gap:6px;flex-wrap:wrap}
+.mod .chev{color:var(--mut)}
+.tbadge{position:absolute;top:-5px;right:-5px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--red);color:#fff;font-size:11.5px;font-weight:700;line-height:20px;text-align:center;border:2px solid var(--surface)}
+.save{background:var(--grnS);border:0}
+.save .big{font-size:26px;font-weight:800;color:var(--grn);letter-spacing:-.5px;line-height:1.15;margin:2px 0 6px}
+.save ul{margin:8px 0 0;padding:0;list-style:none}
+.save li{display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:6px 0;border-top:1px solid color-mix(in srgb,var(--grn) 18%,transparent);color:var(--ink2)}
+.save li b{color:var(--ink);white-space:nowrap}
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.quick .btn{padding:13px;border-radius:var(--r)}
+.steps{counter-reset:s;margin:0;padding:0;list-style:none}
+.steps li{display:flex;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.steps li:first-child{border-top:0;padding-top:2px}
+.steps li::before{counter-increment:s;content:counter(s);flex:none;width:26px;height:26px;border-radius:50%;background:var(--priS);color:var(--pri);font-weight:700;font-size:13px;display:grid;place-items:center}
+.steps b{display:block;font-size:15px}
+.steps span{color:var(--mut);font-size:14px}
+.privacy{display:flex;gap:14px;align-items:flex-start}
+.privacy ul{margin:6px 0 0;padding:0;list-style:none}
+.privacy li{display:flex;gap:8px;align-items:center;font-size:14px;color:var(--ink2);margin:5px 0}
+.privacy li svg.i{width:16px;height:16px;color:var(--pri)}
+
+/* avisos */
+.intro{display:flex;gap:12px;align-items:flex-start;background:var(--priS);border-radius:var(--r);padding:13px 15px;margin:4px 0 14px;color:var(--ink2);font-size:14px}
+.intro svg.i{color:var(--pri);margin-top:2px}
+.seg{display:flex;background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:3px;gap:3px;margin-bottom:12px}
+.seg button{flex:1;border:0;background:transparent;padding:8px 6px;border-radius:9px;font-size:13.5px;font-weight:600;color:var(--mut);cursor:pointer}
+.seg button.on{background:var(--surface);color:var(--ink);box-shadow:var(--sh)}
+.av{display:flex;gap:13px;align-items:flex-start}
+.av .t{font-weight:650;font-size:15.5px;letter-spacing:-.1px}
+.av .notes{font-size:13.5px;color:var(--ink2);margin-top:4px;background:var(--surface2);border-radius:8px;padding:6px 9px}
+.acts{display:flex;gap:2px;flex-wrap:wrap;margin:10px -8px -6px}
+.acts .btn.sm{padding:7px 9px}
+.prog{height:4px;background:var(--surface2);border-radius:4px;overflow:hidden;margin-top:9px}
+.prog i{display:block;height:100%;border-radius:4px}
+.fab{position:fixed;right:max(16px,calc(50% - 364px));bottom:calc(var(--tab) + var(--safe-b) + 16px);z-index:14;display:none;align-items:center;gap:8px;border:0;border-radius:16px;padding:14px 18px;background:var(--pri);color:var(--pri-ink);font-weight:650;box-shadow:var(--sh2);cursor:pointer}
+.fab.on{display:inline-flex}
+.empty{text-align:center;padding:30px 18px}
+.empty .tile{margin:0 auto 12px;width:60px;height:60px;border-radius:18px}
+.empty .tile svg.i{width:30px;height:30px}
+.empty h3{margin:0 0 6px;font-size:17px}
+.empty p{margin:0 0 16px;color:var(--mut);font-size:14.5px}
+
+/* formularios y modales */
+label{display:block;font-size:13.5px;font-weight:600;color:var(--ink2);margin:14px 0 6px}
+input,select,textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--surface2);border:1px solid var(--line);border-radius:var(--r-sm);padding:11px 12px;outline:none;transition:border-color .15s,box-shadow .15s}
+input:focus,select:focus,textarea:focus{border-color:var(--pri);box-shadow:0 0 0 3px color-mix(in srgb,var(--pri) 20%,transparent)}
+textarea{min-height:90px;resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hint{font-size:12.5px;color:var(--mut);margin-top:6px}
+.modal{position:fixed;inset:0;background:rgba(10,16,13,.5);display:none;align-items:flex-end;justify-content:center;z-index:40}
+.modal.on{display:flex;animation:fade .18s}
+.sheet{background:var(--surface);width:100%;max-width:560px;max-height:92vh;overflow:auto;border-radius:22px 22px 0 0;padding:8px 18px calc(22px + var(--safe-b));box-shadow:var(--sh2);animation:up .24s cubic-bezier(.2,.8,.2,1)}
+@keyframes up{from{transform:translateY(30px);opacity:.6}to{transform:none;opacity:1}}
+.sheet .grab{width:38px;height:5px;border-radius:5px;background:var(--line);margin:4px auto 12px}
+.sheet h2{margin:0 0 4px;font-size:20px;letter-spacing:-.3px}
+.sheet .sub{color:var(--mut);margin:0 0 6px;font-size:14px}
+.sheet .foot{display:flex;gap:8px;margin-top:20px}
+.sheet .foot .btn{flex:1}
+@media(min-width:640px){.modal{align-items:center}.sheet{border-radius:22px}.sheet .grab{display:none}.sheet{padding-top:20px}}
+.tcat{font-size:12px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--mut);margin:12px 0 6px}
+.tcat:first-of-type{margin-top:0}
+.salud-note{display:flex;gap:10px;align-items:flex-start;background:var(--redS);color:var(--ink2);border-radius:12px;padding:10px 12px;font-size:13px;margin-top:12px;line-height:1.4}
+.salud-note svg.i{color:var(--red);width:18px;height:18px;margin-top:1px}
+.pfil{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 10px;margin:0 -2px;scrollbar-width:none}
+.pfil::-webkit-scrollbar{display:none}
+.pfil button{flex:none;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:5px 12px 5px 5px;font-size:13.5px;font-weight:600;color:var(--ink2);cursor:pointer}
+.pfil button.all{padding-left:12px}
+.pfil button.on{border-color:var(--pri);background:var(--priS);color:var(--ink)}
+.ava{width:24px;height:24px;border-radius:50%;display:inline-grid;place-items:center;color:#fff;font-size:11.5px;font-weight:700;flex:none}
+.who{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;color:var(--ink2);margin-top:5px}
+.who .ava{width:18px;height:18px;font-size:10px}
+.typegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.typegrid button{border:1px solid var(--line);background:var(--surface2);border-radius:12px;padding:10px 4px;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--ink2);cursor:pointer}
+.typegrid button .tile{width:34px;height:34px;border-radius:10px}
+.typegrid button .tile svg.i{width:18px;height:18px}
+.typegrid button.on{border-color:var(--pri);background:var(--priS);color:var(--ink);box-shadow:0 0 0 1px var(--pri)}
+.option{display:flex;gap:12px;align-items:center;width:100%;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:13px 14px;margin-top:8px;cursor:pointer;text-decoration:none;color:var(--ink)}
+.option:hover{background:var(--surface2)}
+.option b{display:block;font-size:15px}
+.option span{font-size:13px;color:var(--mut)}
+
+/* facturas */
+.drop{border:1.5px dashed color-mix(in srgb,var(--pri) 45%,var(--line));border-radius:var(--r);padding:26px 18px;text-align:center;cursor:pointer;background:var(--surface);transition:background .15s}
+.drop:hover,.drop.over{background:var(--priS)}
+.drop .tile{margin:0 auto 10px;width:54px;height:54px;border-radius:16px}
+.drop b{font-size:16px}
+.supp{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.total{font-size:36px;font-weight:750;letter-spacing:-1px;line-height:1.1;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-top:14px}
+.kpi{background:var(--surface2);border-radius:12px;padding:10px 12px}
+.kpi b{display:block;font-size:17px;font-variant-numeric:tabular-nums}
+.kpi span{font-size:12px;color:var(--mut)}
+.bar{padding:11px 0;border-top:1px solid var(--line)}
+.bar:first-of-type{border-top:0}
+.bar .lab{display:flex;justify-content:space-between;gap:8px;font-size:15px;font-weight:550}
+.bar .lab b{font-variant-numeric:tabular-nums}
+.bar .trk{height:7px;background:var(--surface2);border-radius:7px;overflow:hidden;margin:7px 0 6px}
+.bar .fil{height:100%;background:var(--pri);border-radius:7px}
+.bar.neg .fil{background:var(--grn)}
+.bar.warn .fil{background:var(--red)}
+.bar.warn .lab span{color:var(--red)}
+.bar .exp{font-size:13px;color:var(--mut);line-height:1.4}
+.tips{margin:0;padding:0;list-style:none}
+.tips li{display:flex;gap:10px;padding:9px 0;border-top:1px solid var(--line);font-size:14.5px;color:var(--ink2)}
+.tips li:first-child{border-top:0}
+.tips li svg.i{width:18px;height:18px;color:var(--pri);margin-top:2px}
+.tips li.w svg.i{color:var(--amb)}
+.hist{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.hist:first-child{border-top:0}
+.hist .tile{width:36px;height:36px;border-radius:10px}
+.hist .tile svg.i{width:18px;height:18px}
+details.more{margin-top:12px}
+details.more summary{cursor:pointer;color:var(--pri);font-weight:600;font-size:14.5px;list-style:none;display:flex;align-items:center;gap:6px;padding:6px 2px}
+details.more summary::-webkit-details-marker{display:none}
+
+/* ajustes */
+.setting{display:flex;gap:13px;align-items:flex-start;padding:14px 0;border-top:1px solid var(--line)}
+.setting:first-child{border-top:0;padding-top:0}
+.setting:last-child{padding-bottom:0}
+.setting h3{margin:0 0 2px;font-size:15.5px}
+.setting p{margin:0 0 10px;color:var(--mut);font-size:14px}
+
+/* juego */
+.game{position:relative;user-select:none;-webkit-user-select:none;touch-action:manipulation;overflow:hidden;min-height:610px}
+.gHud{display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:8px}
+.gMid{text-align:center}
+.gUnit{font-size:13px;font-weight:700;color:var(--amb);letter-spacing:0}
+.gMeter{font-size:30px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.8px;line-height:1.1}
+.gLbl{font-size:11.5px;font-weight:700;letter-spacing:.8px;color:var(--mut)}
+.gTrk{height:10px;background:var(--surface2);border-radius:10px;overflow:hidden;margin:12px 0 6px}
+.gFil{height:100%;width:0;background:linear-gradient(90deg,#2fa36f,#e4a400 60%,#d0362b);transition:width .1s linear}
+.gSub{display:flex;justify-content:space-between;gap:6px}
+#gCombo{color:var(--amb);font-weight:700}
+.gGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}
+.gB{aspect-ratio:1;border:0;border-radius:18px;background:#202725;color:#56635e;cursor:pointer;display:grid;place-items:center;position:relative;transition:transform .07s,background .15s,box-shadow .15s}
+.gB svg.i{width:46%;height:46%;stroke-width:1.6}
+.gB.on{background:radial-gradient(circle at 50% 40%,#fff8c4 0%,#ffd84d 50%,#f2a900 100%);color:#5a3d00;box-shadow:0 0 0 2px #ffe58a,0 0 26px rgba(255,200,40,.75);animation:glow .55s infinite alternate}
+.gB.sun{background:radial-gradient(circle,#d9f5ff,#53b8ec);color:#06415f;box-shadow:0 0 22px rgba(80,180,236,.7)}
+.gB.off{animation:offk .28s ease-out}
+.gB.off::after{content:"";position:absolute;inset:0;border-radius:18px;border:3px solid #ffd84d;animation:ring .35s ease-out forwards}
+.gB:active{transform:scale(.92)}
+@keyframes glow{to{box-shadow:0 0 0 2px #ffe58a,0 0 38px rgba(255,200,40,.95)}}
+@keyframes offk{0%{transform:scale(.86);background:#fff3a6}100%{transform:scale(1)}}
+@keyframes ring{from{transform:scale(.9);opacity:1}to{transform:scale(1.35);opacity:0}}
+.gBanner{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%) scale(.6);opacity:0;pointer-events:none;background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:16px;font-weight:800;font-size:20px;white-space:nowrap;box-shadow:var(--sh2);text-align:center}
+.gBanner small{display:block;font-size:13px;font-weight:600;opacity:.8}
+.gBanner.show{animation:ban 1.3s ease forwards}
+@keyframes ban{15%{opacity:1;transform:translate(-50%,-50%) scale(1.05)}25%{transform:translate(-50%,-50%) scale(1)}80%{opacity:1}100%{opacity:0;transform:translate(-50%,-60%) scale(1)}}
+.gOver{position:absolute;inset:0;background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;z-index:2}
+.gOver h2{margin:12px 0 4px;font-size:25px;letter-spacing:-.5px}
+.gOver .lead{color:var(--mut);margin:0 0 16px;font-size:14.5px}
+.gRules{list-style:none;padding:0;margin:0 0 18px;text-align:left;display:grid;gap:9px;max-width:300px}
+.gRules li{display:flex;gap:10px;align-items:center;font-size:14.5px;color:var(--ink2)}
+.gRules .tile{width:32px;height:32px;border-radius:10px}.gRules .tile svg.i{width:17px;height:17px}
+.gStats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%;max-width:320px;margin:4px 0 16px}
+.gStats div{background:var(--surface2);border-radius:12px;padding:9px 6px}
+.gStats b{display:block;font-size:20px;font-variant-numeric:tabular-nums}
+.gStats span{font-size:11.5px;color:var(--mut)}
+.medals{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.medal{text-align:center;font-size:12px;font-weight:600;color:var(--ink2)}
+.medal .m{width:52px;height:52px;margin:0 auto 6px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:14px;color:#fff;box-shadow:inset 0 -3px 0 rgba(0,0,0,.18)}
+.medal.lock .m{background:var(--surface2)!important;color:var(--mut);box-shadow:none;border:1.5px dashed var(--line)}
+.medal.lock{color:var(--mut)}
+.reto{display:flex;gap:13px;align-items:center}
+.reto .bar2{height:8px;background:var(--surface2);border-radius:8px;overflow:hidden;margin-top:8px}
+.reto .bar2 i{display:block;height:100%;background:var(--amb);border-radius:8px}
+.pop{position:absolute;pointer-events:none;font-weight:800;color:var(--amb);animation:popup .7s forwards;z-index:1}
+.pop.g{color:var(--grn)}
+@keyframes popup{to{transform:translateY(-40px);opacity:0}}
+
+.toast{position:fixed;left:50%;bottom:calc(var(--tab) + var(--safe-b) + 86px);transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:11px 16px;border-radius:12px;font-size:14.5px;font-weight:550;z-index:60;display:none;max-width:90vw;box-shadow:var(--sh2)}
+.thumb{max-width:100%;max-height:60vh;border-radius:12px;display:block;margin:auto}
+a{color:var(--pri)}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<!-- Iconos (trazos al estilo Lucide) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <defs>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9.5 21v-6h5v6"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+  <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 17.5v-11"/></symbol>
+  <symbol id="i-game" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="4"/><path d="M6 12h4M8 10v4"/><path d="M15 11h.01M18 13h.01"/></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+  <symbol id="i-calplus" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v5M9.5 16.5h5"/></symbol>
+  <symbol id="i-clip" viewBox="0 0 24 24"><path d="m21.4 11-8.6 8.6a6 6 0 0 1-8.5-8.5l8.6-8.6a4 4 0 0 1 5.7 5.7l-8.6 8.6a2 2 0 0 1-2.8-2.8l7.9-7.9"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></symbol>
+  <symbol id="i-edit" viewBox="0 0 24 24"><path d="M17 3a2.8 2.8 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></symbol>
+  <symbol id="i-shieldcheck" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-umbrella" viewBox="0 0 24 24"><path d="M22 12a10 10 0 0 0-20 0Z"/><path d="M12 12v7a2 2 0 0 0 4 0"/><path d="M12 2v1"/></symbol>
+  <symbol id="i-car" viewBox="0 0 24 24"><path d="M19 17h2v-4l-2.2-5.2A2 2 0 0 0 17 6.5H7a2 2 0 0 0-1.8 1.3L3 13v4h2"/><circle cx="7.5" cy="17" r="2"/><circle cx="16.5" cy="17" r="2"/><path d="M9.5 17h5M3 13h18"/></symbol>
+  <symbol id="i-id" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8" cy="12" r="2.5"/><path d="M14 10h5M14 14h3"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol>
+  <symbol id="i-wheel" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/><path d="M12 14v7M10 12H3.5M14 12h6.5"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></symbol>
+  <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12"/><circle cx="12" cy="10" r="2.5"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></symbol>
+  <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5S12.5 5 12 2.5C11.5 5 10 7.4 8 9 6 10.6 5 12.5 5 15a7 7 0 0 0 7 7z"/></symbol>
+  <symbol id="i-flame" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.4-.5-2-1-3-1.1-2.1-.2-4.1 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.2.4-2.3 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5M12 3v12"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5M12 15V3"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></symbol>
+  <symbol id="i-cloudoff" viewBox="0 0 24 24"><path d="m2 2 20 20"/><path d="M5.8 5.8A7 7 0 0 0 9 19h8.5a4.5 4.5 0 0 0 1.3-.2M21.5 15.5A4.5 4.5 0 0 0 17.5 10h-1.8A7 7 0 0 0 10 5.1"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="i-stetho" viewBox="0 0 24 24"><path d="M5 3H4v5a4 4 0 0 0 8 0V3h-1"/><path d="M8 12v2a5 5 0 0 0 10 0v-2"/><circle cx="18" cy="10" r="2"/></symbol>
+  <symbol id="i-pill" viewBox="0 0 24 24"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></symbol>
+  <symbol id="i-syringe" viewBox="0 0 24 24"><path d="m18 2 4 4M17 7l3-3M19 9 8.7 19.3a2.4 2.4 0 0 1-3.4 0l-.6-.6a2.4 2.4 0 0 1 0-3.4L15 5M9 11l4 4M5 19l-3 3M14 4l6 6"/></symbol>
+  <symbol id="i-rx" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11v6M9 14h6"/></symbol>
+  <symbol id="i-heartcard" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M12 15.5s-3.5-2-3.5-4.2A1.8 1.8 0 0 1 12 10.5a1.8 1.8 0 0 1 3.5.8c0 2.2-3.5 4.2-3.5 4.2Z"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.2a6.5 6.5 0 0 1 3.5 5.8"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.7V17c0 .6-.5 1-1 1.2-1.2.5-2 2-2 3.8M14 14.7V17c0 .6.5 1 1 1.2 1.2.5 2 2 2 3.8M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol>
+ </defs>
+</svg>
+
+<header class="appbar" id="appbar"><div class="in" id="appbarIn"></div></header>
+
+<main>
+  <!-- ================= INICIO ================= -->
+  <section class="view" id="v-inicio">
+    <div class="hero">
+      <span class="pill"><svg class="i"><use href="#i-lock"/></svg>Privado · sin cuentas · sin nube</span>
+      <h2>Tus gestiones de casa,<br>siempre al día.</h2>
+      <p>Te avisa antes de que caduque una garantía, el seguro o la ITV, te recuerda las citas médicas y la caducidad de tus medicinas, y te explica en cristiano lo que pagas en la luz, el agua, el gas o el teléfono.</p>
+    </div>
+    <div id="homeStatus"></div>
+
+    <div class="sec-h"><h2>Secciones</h2></div>
+    <button class="mod" onclick="go('avisos')">
+      <span class="tile t-pri" style="position:relative"><svg class="i"><use href="#i-bell"/></svg><span class="tbadge hidden" id="homeDot"></span></span>
+      <span class="grow"><h3>Mis avisos y garantías</h3><p>Garantías, seguros, ITV, citas médicas, medicinas, DNI… para ti y para los tuyos. Te avisamos con antelación.</p><span class="meta" id="metaAvisos"></span></span>
+      <svg class="i chev"><use href="#i-chev"/></svg>
+    </button>
+    <button class="mod" onclick="go('facturas')">
+      <span class="tile t-blu"><svg class="i"><use href="#i-receipt"/></svg></span>
+      <span class="grow"><h3>Facturas explicadas</h3><p>Sube el PDF de tu factura y te decimos en qué se va cada euro y dónde puedes ahorrar.</p><span class="meta" id="metaFacturas"></span></span>
+      <svg class="i chev"><use href="#i-chev"/></svg>
+    </button>
+    <button class="mod" onclick="go('juego')">
+      <span class="tile t-amb"><svg class="i"><use href="#i-bulb"/></svg></span>
+      <span class="grow"><h3>Apaga la luz</h3><p>Minijuego de reflejos: apaga las bombillas antes de que salte el apagón.</p><span class="meta" id="metaJuego"></span></span>
+      <svg class="i chev"><use href="#i-chev"/></svg>
+    </button>
+
+    <div class="sec-h"><h2>Acciones rápidas</h2></div>
+    <div class="quick">
+      <button class="btn" onclick="go('avisos');setTimeout(()=>formAviso(),60)"><svg class="i"><use href="#i-plus"/></svg>Nuevo aviso</button>
+      <button class="btn" onclick="go('facturas');setTimeout(()=>$('#fPdf').click(),60)"><svg class="i"><use href="#i-upload"/></svg>Subir factura</button>
+    </div>
+
+    <div class="sec-h"><h2>Cómo funciona</h2></div>
+    <div class="card">
+      <ol class="steps">
+        <li><div><b>Apunta lo que vence</b><span>El seguro del coche, la cita del dentista, la caducidad de una medicina o el DNI. Para ti o para cualquiera de casa.</span></div></li>
+        <li><div><b>Llévalo a tu calendario</b><span>Cada aviso se añade con dos alarmas: unos días antes y el mismo día.</span></div></li>
+        <li><div><b>Entiende tus facturas</b><span>Sube el PDF y verás qué pagas, cuánto al día y qué puedes revisar para ahorrar.</span></div></li>
+      </ol>
+    </div>
+
+    <div class="card privacy">
+      <span class="tile t-grn"><svg class="i"><use href="#i-lock"/></svg></span>
+      <div><b>Tus datos no salen de este dispositivo</b>
+        <ul><li><svg class="i"><use href="#i-check"/></svg>Sin registro ni cuentas</li><li><svg class="i"><use href="#i-check"/></svg>Las facturas se leen aquí, sin subirlas a internet</li><li><svg class="i"><use href="#i-check"/></svg>Funciona sin conexión una vez instalada</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= AVISOS ================= -->
+  <section class="view" id="v-avisos">
+    <div class="intro" id="introAvisos"><svg class="i"><use href="#i-info"/></svg><div>Añade lo que caduca y te avisaremos antes. Pulsa <b>Calendario</b> en cada aviso para que la alarma te salte en el móvil aunque no abras la app.</div></div>
+    <div class="pfil hidden" id="pfil"></div>
+    <div class="seg" id="segAvisos">
+      <button data-f="todos" class="on">Todos</button><button data-f="pend">Pendientes</button><button data-f="ok">Al día</button>
+    </div>
+    <div id="listaAvisos"></div>
+    <button class="btn block" id="btnIcsAll" style="margin-top:4px"><svg class="i"><use href="#i-download"/></svg>Exportar todos al calendario</button>
+  </section>
+
+  <!-- ================= FACTURAS ================= -->
+  <section class="view" id="v-facturas">
+    <div class="drop" id="drop">
+      <span class="tile t-blu"><svg class="i"><use href="#i-upload"/></svg></span>
+      <b>Sube tu factura en PDF</b>
+      <div class="mut small">Pulsa aquí o arrastra el archivo. Se lee en tu dispositivo, no se envía a ningún sitio.</div>
+      <div class="supp"><span class="chip neu"><svg class="i" style="width:13px;height:13px"><use href="#i-zap"/></svg>Luz</span><span class="chip neu"><svg class="i" style="width:13px;height:13px"><use href="#i-drop"/></svg>Agua</span><span class="chip neu"><svg class="i" style="width:13px;height:13px"><use href="#i-flame"/></svg>Gas</span><span class="chip neu"><svg class="i" style="width:13px;height:13px"><use href="#i-phone"/></svg>Teléfono e internet</span></div>
+      <input type="file" id="fPdf" accept="application/pdf" class="hidden">
+    </div>
+    <details class="more">
+      <summary><svg class="i" style="width:16px;height:16px"><use href="#i-chev"/></svg>¿No tienes el PDF? Pega el texto o prueba un ejemplo</summary>
+      <div class="card" style="margin-top:6px">
+        <label for="txtFactura" style="margin-top:0">Texto de la factura</label>
+        <textarea id="txtFactura" placeholder="Copia y pega aquí el texto de la factura…"></textarea>
+        <div class="toolbar" style="margin-top:10px">
+          <button class="btn pri sm" id="btnAnalizarTxt">Analizar texto</button>
+          <button class="btn sm" data-ej="luz">Ejemplo luz</button><button class="btn sm" data-ej="agua">Ejemplo agua</button>
+          <button class="btn sm" data-ej="tel">Ejemplo teléfono</button><button class="btn sm" data-ej="gas">Ejemplo gas</button>
+        </div>
+      </div>
+    </details>
+    <div id="resultado" style="margin-top:12px"></div>
+    <div class="sec-h"><h2>Historial</h2><span class="mut xs" id="histCount"></span></div>
+    <div class="card" id="historial"></div>
+  </section>
+
+  <!-- ================= JUEGO ================= -->
+  <section class="view" id="v-juego">
+    <div class="card game" id="game">
+      <div class="gHud">
+        <div><div class="gLbl">CONSUMO</div><div class="gMeter"><span id="gEur">0</span> <span class="gUnit">chispas</span></div></div>
+        <div class="gMid"><div class="gLbl">NIVEL</div><div class="gMeter" id="gLvl">1</div></div>
+        <div style="text-align:right"><div class="gLbl">APAGADAS</div><div class="gMeter" id="gScore">0</div></div>
+      </div>
+      <div class="gTrk"><div class="gFil" id="gFil"></div></div>
+      <div class="mut xs gSub"><span>Apagón a las 100 chispas</span><span id="gCombo"></span><span>Récord: <b id="gBest">0</b></span></div>
+      <div class="gGrid" id="gGrid"></div>
+      <div class="gBanner" id="gBanner"></div>
+      <div id="gOver" class="gOver"></div>
+    </div>
+    <div class="card" id="gReto"></div>
+    <div class="card"><div class="row"><b class="grow">Medallas</b><span class="mut xs" id="gWeek"></span></div><div class="medals" id="gMedals"></div></div>
+  </section>
+
+  <!-- ================= AJUSTES ================= -->
+  <section class="view" id="v-ajustes">
+    <div class="card">
+      <div class="setting"><span class="tile t-pri"><svg class="i"><use href="#i-bell"/></svg></span><div class="grow">
+        <h3>Notificaciones</h3><p id="notifTxt">Recibe un aviso al abrir la app si algo vence pronto. Para avisos con la app cerrada, usa el calendario.</p>
+        <div class="row"><button class="btn sm" id="btnNotif">Permitir notificaciones</button><span class="mut xs" id="notifState"></span></div></div></div>
+      <div class="setting"><span class="tile t-blu"><svg class="i"><use href="#i-download"/></svg></span><div class="grow">
+        <h3>Copia de seguridad</h3><p>Tus datos solo están en este dispositivo. Guarda una copia de vez en cuando para no perderlos si cambias de móvil.</p>
+        <div class="toolbar"><button class="btn sm" id="btnExport"><svg class="i"><use href="#i-download"/></svg>Exportar</button><button class="btn sm" id="btnImport"><svg class="i"><use href="#i-upload"/></svg>Importar</button></div>
+        <input type="file" id="fImport" accept="application/json,.json" class="hidden"></div></div>
+      <div class="setting"><span class="tile t-red"><svg class="i"><use href="#i-trash"/></svg></span><div class="grow">
+        <h3>Borrar todos los datos</h3><p>Elimina avisos, facturas y adjuntos de este dispositivo.</p>
+        <button class="btn sm danger" id="btnBorrarTodo">Borrar todo</button></div></div>
+    </div>
+    <div class="card privacy">
+      <span class="tile t-red"><svg class="i"><use href="#i-stetho"/></svg></span>
+      <div class="small"><b>Sobre los avisos de salud</b><p class="mut" style="margin:4px 0 0">Al Día solo te recuerda fechas: citas, recetas que hay que renovar y medicinas que caducan. No calcula dosis, no indica tratamientos ni sustituye el consejo de tu médico o farmacéutico.</p></div>
+    </div>
+    <div class="card privacy">
+      <span class="tile t-grn"><svg class="i"><use href="#i-lock"/></svg></span>
+      <div class="small"><b>Privacidad</b><p class="mut" style="margin:4px 0 0">Al Día no tiene servidor ni cuentas y no envía nada. Las facturas se analizan en tu dispositivo y los datos se guardan en el almacenamiento local del navegador.</p></div>
+    </div>
+    <p class="mut xs" style="text-align:center">Al Día · versión 0.6</p>
+  </section>
+</main>
+
+<button class="fab" id="fab"><svg class="i"><use href="#i-plus"/></svg>Nuevo aviso</button>
+
+<nav class="tabbar"><div class="in" id="tabbar">
+  <button data-v="inicio"><svg class="i"><use href="#i-home"/></svg>Inicio</button>
+  <button data-v="avisos"><svg class="i"><use href="#i-bell"/></svg>Avisos<span class="dot hidden" id="dotAvisos"></span></button>
+  <button data-v="facturas"><svg class="i"><use href="#i-receipt"/></svg>Facturas</button>
+  <button data-v="juego"><svg class="i"><use href="#i-game"/></svg>Juego</button>
+  <button data-v="ajustes"><svg class="i"><use href="#i-settings"/></svg>Ajustes</button>
+</div></nav>
+
+<div class="modal" id="modal"><div class="sheet" id="sheet"></div></div>
+<div class="toast" id="toast"></div>
+
+<script src="vendor/capacitor.js"></script>
+<script>
+"use strict";
+/* ---------- utilidades ---------- */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ic=(n,st='')=>`<svg class="i"${st?` style="${st}"`:''}><use href="#i-${n}"/></svg>`;
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+const eur=n=>n==null||isNaN(n)?'—':n.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
+const nfmt=(n,d=0)=>n==null||isNaN(n)?'—':n.toLocaleString('es-ES',{maximumFractionDigits:d});
+function toast(m,ms=2600){const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(toast._t);toast._t=setTimeout(()=>t.style.display='none',ms)}
+const today=()=>{const d=new Date();d.setHours(0,0,0,0);return d};
+const parseISO=s=>{const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
+const iso=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const daysTo=s=>Math.round((parseISO(s)-today())/86400000);
+const fmtDate=s=>s?parseISO(s).toLocaleDateString('es-ES',{day:'numeric',month:'short',year:'numeric'}):'—';
+const addYears=(s,n)=>{const d=parseISO(s);d.setFullYear(d.getFullYear()+n);return iso(d)};
+
+/* ---------- capa nativa (Capacitor): se activa solo dentro de la app de Android/iOS ---------- */
+const NATIVE=!!(window.Capacitor&&Capacitor.isNativePlatform&&Capacitor.isNativePlatform());
+const NP=n=>NATIVE?Capacitor.registerPlugin(n):null;
+const LN=NP('LocalNotifications'),CAM=NP('Camera'),FS=NP('Filesystem'),SH=NP('Share'),HAP=NP('Haptics'),APP=NP('App'),SB=NP('StatusBar');
+function vib(k){try{if(HAP){k==='ok'?HAP.notification({type:'SUCCESS'}):k==='bad'?HAP.notification({type:'ERROR'}):HAP.impact({style:'LIGHT'})}else if(navigator.vibrate)navigator.vibrate(k==='bad'?[80,60,160]:k==='ok'?[30,40,30]:10)}catch(e){}}
+const utf8B64=t=>{const b=new TextEncoder().encode(t);let s='';for(let i=0;i<b.length;i+=8192)s+=String.fromCharCode.apply(null,b.subarray(i,i+8192));return btoa(s)};
+const blobB64=b=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(',')[1]);r.onerror=rej;r.readAsDataURL(b)});
+// id numérico estable por aviso (k=1 antelación, k=2 día del vencimiento)
+const nid=(id,k)=>{let h=7;for(const c of id)h=(h*31+c.charCodeAt(0))|0;return(Math.abs(h)%100000000)*10+k};
+async function permisoNotif(pedir){if(!LN)return false;try{let p=await LN.checkPermissions();if(p.display!=='granted'&&pedir)p=await LN.requestPermissions();return p.display==='granted'}catch(e){return false}}
+let _syncT=null;const syncNotifsSoon=()=>{clearTimeout(_syncT);_syncT=setTimeout(syncNotifs,300)};
+async function syncNotifs(){if(!LN||!(await permisoNotif(false)))return 0;try{
+  const pend=await LN.getPending();if(pend.notifications&&pend.notifications.length)await LN.cancel({notifications:pend.notifications.map(n=>({id:n.id}))});
+  const now=new Date(),out=[];
+  for(const a of await Store.all('avisos')){let f=a.fecha;if(a.rep)while(daysTo(f)<0)f=addYears(f,1);const t=TT(a),q=quien(a);
+    const pre=parseISO(f);pre.setDate(pre.getDate()-a.aviso);pre.setHours(9,0,0,0);
+    let dia=cuando(a,f);if(a.hora){dia=new Date(dia.getTime()-2*3600e3);const min=parseISO(f);min.setHours(7,0,0,0);if(dia<min)dia=min}
+    const body=`${q!=='Yo'?q+' · ':''}${t.n} · ${fmtWhen(a,f)}`;
+    const cuandoTxt=a.aviso===1?'mañana':`en ${diasTxt(a.aviso)}`;
+    if(pre>now)out.push({id:nid(a.id,1),title:`${t.ev} ${cuandoTxt}: ${a.nombre}`,body,schedule:{at:pre},extra:{v:'avisos'}});
+    if(dia>now)out.push({id:nid(a.id,2),title:`${t.ev} hoy${a.hora?' a las '+a.hora:''}: ${a.nombre}`,body,schedule:{at:dia},extra:{v:'avisos'}})}
+  out.sort((x,y)=>x.schedule.at-y.schedule.at);const lote=out.slice(0,60); // iOS admite 64 pendientes
+  if(lote.length)await LN.schedule({notifications:lote});return lote.length}catch(e){console.warn('notificaciones',e);return 0}}
+async function trasGuardar(id,renov){ // después de crear o renovar un aviso
+  if(NATIVE){const a=(await Store.all('avisos')).find(x=>x.id===id);if(await permisoNotif(true)){await syncNotifs();toast(`Te avisaremos ${avisoTxt(a)}`);return}
+    toast('Activa las notificaciones en Ajustes para recibir el aviso')}
+  calMenu(id,true,renov)}
+
+/* ---------- almacenamiento local ---------- */
+const Store={db:null,mem:{avisos:[],facturas:[]},
+  async init(){try{this.db=await new Promise((res,rej)=>{const r=indexedDB.open('papeles-de-casa',1);
+    r.onupgradeneeded=()=>{const d=r.result;d.createObjectStore('avisos',{keyPath:'id'});d.createObjectStore('facturas',{keyPath:'id'})};
+    r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)})}catch(e){this.db=null}},
+  _tx(st,mode,fn){return new Promise((res,rej)=>{const t=this.db.transaction(st,mode);const q=fn(t.objectStore(st));t.oncomplete=()=>res(q&&q.result);t.onerror=()=>rej(t.error)})},
+  async all(st){if(!this.db)return[...this.mem[st]];return this._tx(st,'readonly',s=>s.getAll())},
+  async put(st,o){if(!this.db){const a=this.mem[st],i=a.findIndex(x=>x.id===o.id);i>=0?a[i]=o:a.push(o);return}return this._tx(st,'readwrite',s=>s.put(o))},
+  async del(st,id){if(!this.db){this.mem[st]=this.mem[st].filter(x=>x.id!==id);return}return this._tx(st,'readwrite',s=>s.delete(id))},
+  async clear(st){if(!this.db){this.mem[st]=[];return}return this._tx(st,'readwrite',s=>s.clear())}
+};
+
+for(const m of ['put','del','clear']){const f=Store[m].bind(Store);Store[m]=async(st,...a)=>{const r=await f(st,...a);if(st==='avisos')syncNotifsSoon();return r}}
+
+/* ---------- descargas (PWA y vista previa en Claude) ---------- */
+let dlCap=null;
+try{if(window.claude&&claude.use)claude.use('downloads').then(d=>dlCap=d).catch(()=>{})}catch(e){}
+async function saveFile(filename,data,mime){
+  if(NATIVE){try{const b64=data instanceof Blob?await blobB64(data):utf8B64(data);const r=await FS.writeFile({path:filename,data:b64,directory:'CACHE'});await SH.share({title:filename,url:r.uri,dialogTitle:'Guardar o compartir'});return true}catch(e){if(!/cancel/i.test(e&&e.message||''))toast('No se pudo compartir el archivo');return false}}
+  if(dlCap){try{await dlCap.save({filename,data});return true}catch(e){toast('Descarga cancelada');return false}}
+  try{const b=data instanceof Blob?data:new Blob([data],{type:mime});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);return true}
+  catch(e){toast('No se pudo descargar en este entorno');return false}}
+
+/* ---------- modal ---------- */
+function openModal(html){$('#sheet').innerHTML='<div class="grab"></div>'+html;$('#modal').classList.add('on');$('#sheet').scrollTop=0}
+function closeModal(){$('#modal').classList.remove('on')}
+$('#modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+function confirmDlg(msg,okTxt='Borrar'){return new Promise(res=>{openModal(`<h2>¿Estás seguro?</h2><p class="sub">${esc(msg)}</p><div class="foot"><button class="btn" id="cNo">Cancelar</button><button class="btn pri" style="background:var(--red);border-color:var(--red);color:#fff" id="cOk">${esc(okTxt)}</button></div>`);
+  $('#cOk').onclick=()=>{closeModal();res(true)};$('#cNo').onclick=()=>{closeModal();res(false)}})}
+
+/* ---------- navegación ---------- */
+const VIEWS={inicio:null,avisos:['Avisos','Casa, documentos y salud'],facturas:['Facturas','Entiende lo que pagas cada mes'],juego:['Apaga la luz','Minijuego de reflejos'],ajustes:['Ajustes','Notificaciones, copia y privacidad']};
+let current=null;
+function go(v){if(location.hash.slice(1)!==v)location.hash=v;else show(v)}
+function show(v){if(!(v in VIEWS))v='inicio';
+  if(current==='juego'&&v!=='juego'&&G.run)gEnd();
+  current=v;$$('.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));$$('#tabbar button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
+  const t=VIEWS[v];
+  $('#appbarIn').innerHTML=t?`<button class="iconbtn" onclick="go('inicio')" aria-label="Volver al inicio">${ic('back')}</button><div class="ttl"><h1>${t[0]}</h1><p>${t[1]}</p></div>`
+    :`<div class="brand"><img src="icons/icon-192.png" alt=""><b>Al Día</b></div><button class="iconbtn" onclick="go('ajustes')" aria-label="Ajustes">${ic('settings')}</button>`;
+  $('#fab').classList.toggle('on',v==='avisos');
+  window.scrollTo({top:0});if(v==='inicio')renderInicio();if(v==='ajustes')syncNotifUI()}
+window.addEventListener('hashchange',()=>show(location.hash.slice(1)));
+$$('#tabbar button').forEach(b=>b.onclick=()=>go(b.dataset.v));
+window.addEventListener('scroll',()=>$('#appbar').classList.toggle('scrolled',scrollY>4),{passive:true});
+
+/* =====================================================================
+   AVISOS
+   ===================================================================== */
+const TIPOS={
+  garantia:{n:'Garantía',i:'shieldcheck',c:'t-pri',aviso:30,rep:false,lbl:'Fin de la garantía',ev:'Fin de garantía',ph:'Ej.: Lavadora Bosch, portátil, sofá'},
+  seguro:{n:'Seguro',i:'umbrella',c:'t-blu',aviso:30,rep:true,lbl:'Fecha de renovación',ev:'Renovar seguro',ph:'Ej.: Seguro del coche, seguro de hogar'},
+  itv:{n:'ITV',i:'car',c:'t-ora',aviso:30,rep:false,lbl:'Fecha límite de la ITV',ev:'ITV',ph:'Ej.: ITV Corolla'},
+  contrato:{n:'Contrato',i:'file',c:'t-sla',aviso:30,rep:false,lbl:'Fin del contrato o permanencia',ev:'Fin de contrato',ph:'Ej.: Permanencia de la fibra'},
+  revision:{n:'Revisión',i:'wrench',c:'t-amb',aviso:15,rep:true,lbl:'Fecha de la revisión',ev:'Revisión',ph:'Ej.: Caldera, extintor, aire acondicionado'},
+  dni:{n:'DNI',i:'id',c:'t-vio',aviso:60,rep:false,lbl:'Fecha de caducidad',ev:'Caduca el DNI',ph:'Ej.: DNI de Lucía'},
+  pasaporte:{n:'Pasaporte',i:'globe',c:'t-vio',aviso:90,rep:false,lbl:'Fecha de caducidad',ev:'Caduca el pasaporte',ph:'Ej.: Pasaporte'},
+  carnet:{n:'Carnet de conducir',i:'wheel',c:'t-vio',aviso:60,rep:false,lbl:'Fecha de caducidad',ev:'Caduca el carnet',ph:'Ej.: Carnet de conducir'},
+  tsanitaria:{n:'Tarjeta sanitaria',i:'heartcard',c:'t-red',aviso:30,rep:false,lbl:'Fecha de caducidad',ev:'Caduca la tarjeta sanitaria',ph:'Ej.: Tarjeta sanitaria',salud:true},
+  cita:{n:'Cita médica',i:'stetho',c:'t-red',aviso:1,rep:false,lbl:'Fecha de la cita',ev:'Cita',ph:'Ej.: Dentista, analítica, oftalmólogo',salud:true,cita:true},
+  vacuna:{n:'Vacuna',i:'syringe',c:'t-red',aviso:7,rep:false,lbl:'Fecha de la vacuna',ev:'Vacuna',ph:'Ej.: Gripe, tétanos, vacuna del perro',salud:true,cita:true},
+  receta:{n:'Receta',i:'rx',c:'t-red',aviso:7,rep:false,lbl:'Fecha en que caduca la receta',ev:'Renovar receta',ph:'Ej.: Receta de la tensión',salud:true},
+  medicamento:{n:'Medicamento',i:'pill',c:'t-red',aviso:30,rep:false,lbl:'Caducidad (viene en la caja)',ev:'Caduca',ph:'Ej.: Ibuprofeno 600, jarabe para la tos',salud:true},
+  otro:{n:'Otro',i:'pin',c:'t-sla',aviso:15,rep:false,lbl:'Fecha',ev:'Aviso',ph:'¿Qué quieres recordar?'}
+};
+const CATS=[['Casa y coche',['garantia','seguro','itv','contrato','revision']],['Documentos',['dni','pasaporte','carnet','tsanitaria']],['Salud',['cita','vacuna','receta','medicamento']],['Otros',['otro']]];
+const TT=a=>TIPOS[a.tipo]||TIPOS.otro;
+const quien=a=>(a.quien||'').trim()||'Yo';
+const AVC=['#1b6b52','#2457c5','#c25412','#5b45c7','#b0306a','#0e7490','#a16207','#4a5a66'];
+const avaColor=n=>{let h=0;for(const c of n)h=(h*31+c.charCodeAt(0))|0;return AVC[Math.abs(h)%AVC.length]};
+const ava=n=>`<span class="ava" style="background:${avaColor(n)}">${esc(n.trim().charAt(0).toUpperCase())}</span>`;
+const fmtWhen=(a,f=a.fecha)=>fmtDate(f)+(a.hora?' · '+a.hora:'');
+const diasTxt=n=>n===1?'1 día':n+' días';
+function cuando(a,f=a.fecha){const d=parseISO(f);if(a.hora){const[h,m]=a.hora.split(':').map(Number);d.setHours(h,m,0,0)}else d.setHours(9,0,0,0);return d}
+function estado(a){const t=TT(a),d=daysTo(a.fecha);
+  if(t.cita){if(d<0||(d===0&&a.hora&&cuando(a)<new Date()))return{c:'neu',t:'Pasada',d};if(d===0)return{c:'red',t:a.hora?`Hoy · ${a.hora}`:'Hoy',d};if(d===1)return{c:'amb',t:'Mañana',d};if(d<=Math.max(a.aviso,7))return{c:'amb',t:`En ${d} días`,d};return{c:'grn',t:`En ${d} días`,d}}
+  const v=['medicamento','receta'].includes(a.tipo)||['dni','pasaporte','carnet','tsanitaria'].includes(a.tipo)?['Caducó','Caduca']:['Venció','Vence'];
+  if(d<0)return{c:'red',t:`${v[0]} hace ${diasTxt(-d)}`,d};if(d===0)return{c:'red',t:`${v[1]} hoy`,d};if(d<=a.aviso)return{c:'amb',t:`${v[1]} en ${diasTxt(d)}`,d};return{c:'grn',t:`Faltan ${d} días`,d}}
+const esPend=a=>['red','amb'].includes(estado(a).c);
+let filtro='todos',filtroP='';
+$$('#segAvisos button').forEach(b=>b.onclick=()=>{filtro=b.dataset.f;$$('#segAvisos button').forEach(x=>x.classList.toggle('on',x===b));renderAvisos()});
+const personasDe=L=>[...new Set(L.map(quien))].sort((x,y)=>x==='Yo'?-1:y==='Yo'?1:x.localeCompare(y,'es'));
+
+async function renderAvisos(){
+  const all=(await Store.all('avisos')).sort((a,b)=>(a.fecha+(a.hora||'')).localeCompare(b.fecha+(b.hora||'')));
+  const pend=all.filter(esPend);
+  $('#dotAvisos').textContent=pend.length;$('#dotAvisos').classList.toggle('hidden',!pend.length);
+  $('#segAvisos').classList.toggle('hidden',!all.length);$('#btnIcsAll').classList.toggle('hidden',!all.length);
+  const P=personasDe(all);if(filtroP&&!P.includes(filtroP))filtroP='';
+  $('#pfil').classList.toggle('hidden',P.length<2);
+  $('#pfil').innerHTML=`<button class="all ${filtroP?'':'on'}" data-p="">${ic('users','width:16px;height:16px')}Todos</button>`+P.map(n=>`<button class="${filtroP===n?'on':''}" data-p="${esc(n)}">${ava(n)}${esc(n)}</button>`).join('');
+  $$('#pfil button').forEach(b=>b.onclick=()=>{filtroP=b.dataset.p;renderAvisos()});
+  let L=filtro==='pend'?pend:filtro==='ok'?all.filter(a=>!esPend(a)):all;if(filtroP)L=L.filter(a=>quien(a)===filtroP);
+  if(!all.length){$('#listaAvisos').innerHTML=`<div class="card empty"><span class="tile t-pri">${ic('bell')}</span><h3>Aún no tienes avisos</h3><p>Empieza por algo que te dé miedo olvidar: el seguro del coche, la cita del médico o una medicina que caduca.</p>
+    <div class="toolbar" style="justify-content:center">${['seguro','itv','cita','medicamento','garantia','dni'].map(k=>`<button class="btn sm" onclick="formAviso(null,{tipo:'${k}'})">${ic(TIPOS[k].i)}${TIPOS[k].n}</button>`).join('')}</div></div>`;return}
+  if(!L.length){$('#listaAvisos').innerHTML=`<div class="card empty"><span class="tile t-grn">${ic('check')}</span><h3>Nada por aquí</h3><p>${filtro==='pend'?'No hay nada pendiente. Todo al día.':'No hay avisos en esta vista.'}</p></div>`;return}
+  const multi=P.length>1;
+  $('#listaAvisos').innerHTML=L.map(a=>{const t=TT(a),e=estado(a),q=quien(a);
+    const span=Math.max(a.aviso*2,t.cita?7:60),pct=e.d<=0?100:Math.max(4,100-Math.min(100,e.d/span*100));
+    return`<div class="card"><div class="av"><span class="tile ${t.c}">${ic(t.i)}</span><div class="grow">
+    <div class="row" style="align-items:flex-start"><div class="grow"><div class="t">${esc(a.nombre)}</div>
+    <div class="mut small">${esc(t.n)} · ${fmtWhen(a)}${a.rep?' · anual':''}</div>${multi||q!=='Yo'?`<div class="who">${ava(q)}${esc(q)}</div>`:''}</div><span class="chip ${e.c}">${e.t}</span></div>
+    ${e.c==='red'||e.c==='amb'?`<div class="prog"><i style="width:${pct}%;background:var(--${e.c==='red'?'red':'amb'})"></i></div>`:''}
+    ${a.notas?`<div class="notes">${esc(a.notas)}</div>`:''}
+    <div class="acts"><button class="btn sm ghost" onclick="calMenu('${a.id}')">${ic('calplus')}Calendario</button>
+    ${a.adj?`<button class="btn sm ghost" onclick="verAdj('${a.id}')">${ic('clip')}Adjunto</button>`:''}
+    <button class="btn sm ghost" onclick="renovar('${a.id}')">${ic(t.cita?'cal':'refresh')}${t.cita?'Cambiar':'Renovar'}</button>
+    <button class="iconbtn" style="margin-left:auto;width:36px;height:36px;color:var(--mut)" onclick="formAviso('${a.id}')" aria-label="Editar">${ic('edit')}</button></div></div></div></div>`}).join('');
+}
+
+async function formAviso(id,prefill){
+  const L=await Store.all('avisos');const a=id?L.find(x=>x.id===id):Object.assign({tipo:'garantia',nombre:'',fecha:'',hora:'',quien:filtroP&&filtroP!=='Yo'?filtroP:'',aviso:null,rep:null,notas:''},prefill||{});
+  if(a.aviso==null)a.aviso=TIPOS[a.tipo].aviso;if(a.rep==null)a.rep=TIPOS[a.tipo].rep;
+  const P=personasDe(L).filter(n=>n!=='Yo');
+  openModal(`<h2>${id?'Editar aviso':'Nuevo aviso'}</h2><p class="sub">${id?'Cambia lo que necesites.':'¿Qué quieres que te recordemos?'}</p>
+  <label>Tipo</label><div id="fTipos">${CATS.map(([cn,ks])=>`<div class="tcat">${cn}</div><div class="typegrid">${ks.map(k=>{const t=TIPOS[k];return`<button type="button" data-k="${k}" class="${k===a.tipo?'on':''}"><span class="tile ${t.c}">${ic(t.i)}</span>${t.n}</button>`}).join('')}</div>`).join('')}</div>
+  <div id="notaSalud" class="salud-note">${ic('info')}<span>Al Día solo te recuerda fechas. <b>No calcula dosis</b>, no indica tratamientos ni sustituye el consejo de tu médico o farmacéutico.</span></div>
+  <label for="fNombre">Nombre</label><input id="fNombre" value="${esc(a.nombre)}" autocomplete="off">
+  <label for="fQuien">¿Para quién?</label><input id="fQuien" list="dlQuien" value="${esc(a.quien||'')}" placeholder="Yo · o escribe: mamá, Lucía, el perro…" autocomplete="off">
+  <datalist id="dlQuien">${['Yo',...P].map(n=>`<option value="${esc(n)}">`).join('')}</datalist>
+  <div id="boxCompra"><div class="grid2"><div><label for="fCompra">Fecha de compra</label><input type="date" id="fCompra" value="${esc(a.compra||'')}"></div>
+  <div><label for="fAnios">Años de garantía</label><input type="number" id="fAnios" min="1" max="10" value="${a.anios||3}"></div></div>
+  <div class="hint">En España, los productos nuevos comprados desde 2022 tienen 3 años de garantía legal. Calculamos el vencimiento por ti.</div></div>
+  <div class="grid2"><div id="boxFecha"><label for="fFecha" id="lblFecha">Fecha</label><input type="date" id="fFecha" value="${esc(a.fecha)}"></div>
+  <div id="boxHora"><label for="fHora">Hora <span class="mut">(opcional)</span></label><input type="time" id="fHora" value="${esc(a.hora||'')}"></div></div>
+  <div class="grid2"><div><label for="fAviso">Avisarme</label><select id="fAviso">${[1,2,3,7,15,30,45,60,90].map(n=>`<option value="${n}" ${n==a.aviso?'selected':''}>${diasTxt(n)} antes</option>`).join('')}</select></div>
+  <div><label for="fRep">Se repite</label><select id="fRep"><option value="0">No</option><option value="1" ${a.rep?'selected':''}>Cada año</option></select></div></div>
+  <label for="fAdj" id="lblAdj">Foto o documento <span class="mut">(opcional)</span></label>${NATIVE?`<div class="row" style="margin-bottom:8px"><button type="button" class="btn sm" id="fCam">${ic('upload')}Hacer foto o elegir de la galería</button><span class="mut xs" id="fCamOk"></span></div>`:''}<input type="file" id="fAdj" accept="${NATIVE?'application/pdf':'image/*,application/pdf'}">
+  ${a.adj?'<div class="hint">Ya hay un adjunto guardado. Si eliges otro, se sustituye.</div>':''}
+  <label for="fNotas">Notas <span class="mut">(opcional)</span></label><textarea id="fNotas">${esc(a.notas)}</textarea>
+  <div class="foot">${id?`<button class="btn danger" id="fBorrar" style="flex:0">${ic('trash')}</button>`:''}<button class="btn" onclick="closeModal()">Cancelar</button><button class="btn pri" id="fGuardar">Guardar</button></div>`);
+  let tipo=a.tipo,camData=null;
+  if(NATIVE)$('#fCam').onclick=async()=>{try{const ph=await CAM.getPhoto({quality:72,width:1400,resultType:'dataUrl',source:'PROMPT',correctOrientation:true,promptLabelHeader:'Adjuntar foto',promptLabelPhoto:'Elegir de la galería',promptLabelPicture:'Hacer foto',promptLabelCancel:'Cancelar'});camData=ph.dataUrl;$('#fCamOk').textContent='Foto lista ✓'}catch(e){}};
+  const syncTipo=()=>{const t=TIPOS[tipo];const hOk=t.cita||['revision','otro'].includes(tipo);$('#boxHora').classList.toggle('hidden',!hOk);$('#boxFecha').style.gridColumn=hOk?'':'1 / -1';if(!hOk)$('#fHora').value='';$('#boxCompra').classList.toggle('hidden',tipo!=='garantia');$('#notaSalud').classList.toggle('hidden',!t.salud);
+    $('#lblFecha').textContent=t.lbl;$('#fNombre').placeholder=t.ph;
+    $('#lblAdj').innerHTML=(t.salud?(tipo==='medicamento'?'Foto de la caja':'Foto del volante, receta o informe'):'Foto del ticket o documento')+' <span class="mut">(opcional)</span>';
+    $('#fNotas').placeholder=t.salud?(t.cita?'Centro de salud, consulta, qué llevar, ir en ayunas…':'Para qué es, dónde está guardado…'):'Nº de póliza, tienda, teléfono de contacto…'};
+  const calc=()=>{const c=$('#fCompra').value,n=+$('#fAnios').value;if(c&&n)$('#fFecha').value=addYears(c,n)};
+  $$('#fTipos button').forEach(b=>b.onclick=()=>{tipo=b.dataset.k;$$('#fTipos button').forEach(x=>x.classList.toggle('on',x===b));const t=TIPOS[tipo];$('#fAviso').value=t.aviso;$('#fRep').value=t.rep?'1':'0';syncTipo()});
+  $('#fCompra').onchange=calc;$('#fAnios').oninput=calc;syncTipo();
+  $('#fGuardar').onclick=async()=>{
+    const q=$('#fQuien').value.trim();
+    const o=Object.assign({},a,{id:a.id||uid(),tipo,nombre:$('#fNombre').value.trim(),quien:q&&q.toLowerCase()!=='yo'?q.charAt(0).toUpperCase()+q.slice(1):'',fecha:$('#fFecha').value,hora:$('#fHora').value,aviso:+$('#fAviso').value,rep:$('#fRep').value==='1',notas:$('#fNotas').value.trim(),compra:$('#fCompra').value,anios:+$('#fAnios').value});
+    if(!o.nombre){$('#fNombre').focus();return toast('Ponle un nombre al aviso')}if(!o.fecha){$('#fFecha').focus();return toast('Falta la fecha')}
+    if(camData){o.adj=camData;o.adjTipo='img'}
+    const f=$('#fAdj').files[0];if(f){try{const r=await leerAdjunto(f);o.adj=r.data;o.adjTipo=r.tipo}catch(e){toast(e.message);return}}
+    await Store.put('avisos',o);closeModal();renderAvisos();toast(id?'Cambios guardados':'Aviso creado');
+    if(!id)setTimeout(()=>trasGuardar(o.id),250)};
+  if(id)$('#fBorrar').onclick=async()=>{if(await confirmDlg(`Se borrará "${a.nombre}" y su adjunto.`)){await Store.del('avisos',id);renderAvisos();toast('Aviso borrado')}};
+}
+function leerAdjunto(f){return new Promise((res,rej)=>{
+  if(f.type==='application/pdf'){if(f.size>3e6)return rej(new Error('PDF demasiado grande (máx. 3 MB)'));const r=new FileReader();r.onload=()=>res({data:r.result,tipo:'pdf'});r.onerror=()=>rej(new Error('No se pudo leer el archivo'));r.readAsDataURL(f);return}
+  const img=new Image();const u=URL.createObjectURL(f);img.onload=()=>{const k=Math.min(1,1400/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=img.width*k;c.height=img.height*k;c.getContext('2d').drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(u);res({data:c.toDataURL('image/jpeg',.72),tipo:'img'})};
+  img.onerror=()=>rej(new Error('Imagen no válida'));img.src=u})}
+async function verAdj(id){const a=(await Store.all('avisos')).find(x=>x.id===id);if(!a)return;
+  if(a.adjTipo==='pdf'){openModal(`<h2>${esc(a.nombre)}</h2><p class="sub">Documento PDF adjunto.</p><div class="foot"><button class="btn" onclick="closeModal()">Cerrar</button><button class="btn pri" id="dlAdj">${ic('download')}Descargar</button></div>`);
+    $('#dlAdj').onclick=()=>{const bin=atob(a.adj.split(',')[1]);const u8=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u8[i]=bin.charCodeAt(i);saveFile(a.nombre+'.pdf',new Blob([u8],{type:'application/pdf'}),'application/pdf')};return}
+  openModal(`<h2>${esc(a.nombre)}</h2><p class="sub">Foto adjunta</p><img class="thumb" src="${a.adj}" alt="Adjunto"><div class="foot"><button class="btn" onclick="closeModal()">Cerrar</button></div>`)}
+async function renovar(id){const a=(await Store.all('avisos')).find(x=>x.id===id);if(!a)return;const t=TT(a);
+  const base=a.fecha&&daysTo(a.fecha)>-400?a.fecha:iso(today());
+  openModal(`<h2>${t.cita?'Nueva fecha':'Renovar'}</h2><p class="sub">${esc(a.nombre)} · ${t.cita?'¿cuándo es la próxima?':'¿hasta cuándo es la nueva fecha?'}</p>
+  ${t.cita?'':`<div class="toolbar" style="margin-top:12px">${[1,2,4,5,10].map(n=>`<button class="btn sm" data-y="${n}">+${n} año${n>1?'s':''}</button>`).join('')}</div>`}
+  <div class="grid2"><div><label for="rFecha">${t.cita?'Fecha':'Nueva fecha'}</label><input type="date" id="rFecha" value="${t.cita?'':addYears(base,1)}"></div>
+  <div><label for="rHora">Hora <span class="mut">(opcional)</span></label><input type="time" id="rHora" value="${esc(a.hora||'')}"></div></div>
+  <div class="foot"><button class="btn" onclick="closeModal()">Cancelar</button><button class="btn pri" id="rOk">Guardar</button></div>`);
+  $$('#sheet [data-y]').forEach(b=>b.onclick=()=>$('#rFecha').value=addYears(base,+b.dataset.y));
+  $('#rOk').onclick=async()=>{if(!$('#rFecha').value)return toast('Elige la fecha');a.fecha=$('#rFecha').value;a.hora=$('#rHora').value;await Store.put('avisos',a);closeModal();renderAvisos();toast('Guardado');setTimeout(()=>trasGuardar(a.id,true),250)}}
+
+/* ---- calendario ---- */
+function icsStamp(){return new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d+/,'')}
+function icsEsc(s){return String(s||'').replace(/\\/g,'\\\\').replace(/;/g,'\;').replace(/,/g,'\\,').replace(/\r?\n/g,'\\n')}
+function icsFold(l){const out=[];while(l.length>73){out.push(l.slice(0,73));l=' '+l.slice(73)}out.push(l);return out.join('\r\n')}
+function evTitle(a){const t=TT(a),q=quien(a);return `${t.ev}: ${a.nombre}${q!=='Yo'?` (${q})`:''}`}
+const fLocal=d=>iso(d).replace(/-/g,'')+'T'+String(d.getHours()).padStart(2,'0')+String(d.getMinutes()).padStart(2,'0')+'00';
+const SALUD_TXT='Al Día solo recuerda fechas: no calcula dosis ni sustituye a tu médico o farmacéutico.';
+function icsEvent(a){const t=TT(a),f=x=>iso(x).replace(/-/g,'');let L;
+  const desc=icsEsc((a.notas?a.notas+'\n\n':'')+(t.salud?SALUD_TXT+'\n':'')+'Aviso creado con Al Día');
+  if(a.hora){const ini=cuando(a),fin=new Date(ini.getTime()+3600e3);
+    L=['BEGIN:VEVENT',`UID:${a.id}@papeles-de-casa`,`DTSTAMP:${icsStamp()}`,`DTSTART:${fLocal(ini)}`,`DTEND:${fLocal(fin)}`,`SUMMARY:${icsEsc(evTitle(a))}`,`DESCRIPTION:${desc}`];
+    if(a.rep)L.push('RRULE:FREQ=YEARLY');
+    L.push('BEGIN:VALARM','ACTION:DISPLAY',`DESCRIPTION:${icsEsc(evTitle(a))}`,`TRIGGER:-P${a.aviso}D`,'END:VALARM','BEGIN:VALARM','ACTION:DISPLAY',`DESCRIPTION:${icsEsc(evTitle(a))}`,'TRIGGER:-PT2H','END:VALARM','END:VEVENT');return L}
+  const d=parseISO(a.fecha),d2=new Date(d);d2.setDate(d2.getDate()+1);const pre=Math.max(0,(a.aviso||30)-1);
+  L=['BEGIN:VEVENT',`UID:${a.id}@papeles-de-casa`,`DTSTAMP:${icsStamp()}`,`DTSTART;VALUE=DATE:${f(d)}`,`DTEND;VALUE=DATE:${f(d2)}`,`SUMMARY:${icsEsc(evTitle(a))}`,`DESCRIPTION:${desc}`,'TRANSP:TRANSPARENT'];
+  if(a.rep)L.push('RRULE:FREQ=YEARLY');
+  L.push('BEGIN:VALARM','ACTION:DISPLAY',`DESCRIPTION:${icsEsc(`Faltan ${diasTxt(a.aviso)}: ${a.nombre}`)}`,`TRIGGER:-P${pre}DT15H`,'END:VALARM');
+  L.push('BEGIN:VALARM','ACTION:DISPLAY',`DESCRIPTION:${icsEsc('Hoy: '+a.nombre)}`,'TRIGGER:PT9H','END:VALARM','END:VEVENT');return L}
+function icsCal(items){return['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Al Día//ES','CALSCALE:GREGORIAN','METHOD:PUBLISH',...items.flatMap(icsEvent),'END:VCALENDAR'].map(icsFold).join('\r\n')+'\r\n'}
+function gcalUrl(a){const f=x=>iso(x).replace(/-/g,'');let dates;
+  if(a.hora){const ini=cuando(a);dates=fLocal(ini)+'/'+fLocal(new Date(ini.getTime()+3600e3))}else{const d=parseISO(a.fecha),d2=new Date(d);d2.setDate(d2.getDate()+1);dates=f(d)+'/'+f(d2)}
+  return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(evTitle(a))+'&dates='+dates+'&details='+encodeURIComponent((a.notas||'')+`\nAvísame ${diasTxt(a.aviso)} antes.`)+(a.rep?'&recur='+encodeURIComponent('RRULE:FREQ=YEARLY'):'')}
+const avisoTxt=a=>`${a.aviso===1?'el día antes':diasTxt(a.aviso)+' antes'} y ${a.hora?'2 horas antes':'el mismo día'}`;
+async function calMenu(id,nuevo,renov){const a=(await Store.all('avisos')).find(x=>x.id===id);if(!a)return;
+  openModal(`<h2>${nuevo?(renov?'Renovado. ':'Aviso creado. ')+'¿Lo añadimos al calendario?':'Añadir al calendario'}</h2>
+  <p class="sub">Así te salta la alarma en el móvil aunque no abras la app: ${avisoTxt(a)}.${renov?' Si ya tenías el evento anterior, bórralo del calendario.':''}</p>
+  <button class="option" id="cIcs"><span class="tile t-pri">${ic('calplus')}</span><span class="grow"><b>${NATIVE?'Exportar evento (.ics)':'Calendario del móvil u Outlook'}</b><span>${NATIVE?'Compártelo con tu app de calendario o tu correo.':'iPhone, Android, Outlook… Las alarmas van incluidas.'}</span></span>${ic('chev')}</button>
+  <a class="option" href="${gcalUrl(a)}" target="_blank" rel="noopener"><span class="tile t-blu">${ic('cal')}</span><span class="grow"><b>Google Calendar</b><span>Se abre en el navegador. Revisa la notificación al guardar.</span></span>${ic('chev')}</a>
+  <div class="foot"><button class="btn" onclick="closeModal()">Ahora no</button></div>`);
+  $('#cIcs').onclick=async()=>{if(await saveFile(a.nombre.replace(/[^\wÀ-ÿ\- ]+/g,'').trim()+'.ics',icsCal([a]),'text/calendar'))closeModal()}}
+$('#btnIcsAll').onclick=async()=>{const L=(await Store.all('avisos')).filter(a=>daysTo(a.fecha)>=0||a.rep);if(!L.length)return toast('No hay avisos futuros');await saveFile('al-dia-avisos.ics',icsCal(L),'text/calendar')};
+$('#fab').onclick=()=>formAviso();
+
+/* ---- notificaciones ---- */
+async function notifPendientes(){try{if(!('Notification'in window)||Notification.permission!=='granted')return;
+  const k='notif-'+iso(today());if(localStorage.getItem(k))return;
+  const urg=(await Store.all('avisos')).filter(a=>esPend(a));if(!urg.length)return;
+  new Notification('Al Día',{body:urg.map(a=>`${a.nombre}: ${estado(a).t.toLowerCase()}`).join('\n'),icon:'icons/icon-192.png'});localStorage.setItem(k,'1')}catch(e){}}
+async function syncNotifUI(){
+  if(NATIVE){const ok=await permisoNotif(false);$('#btnNotif').classList.toggle('hidden',ok);$('#btnNotif').textContent='Activar notificaciones';
+    let n=0;try{n=(await LN.getPending()).notifications.length}catch(e){}$('#notifState').textContent=ok?`Activadas · ${n} aviso${n===1?'':'s'} programado${n===1?'':'s'}`:'Desactivadas';return}
+const s=$('#notifState');if(!('Notification'in window)){s.textContent='No disponible en este navegador';$('#btnNotif').disabled=true;return}
+  const p=Notification.permission;s.textContent={granted:'Activadas',denied:'Bloqueadas en el navegador',default:''}[p]||'';$('#btnNotif').classList.toggle('hidden',p==='granted')}
+$('#btnNotif').onclick=async()=>{if(NATIVE){if(await permisoNotif(true)){await syncNotifs();toast('Notificaciones activadas')}else toast('Actívalas en los ajustes del sistema');return syncNotifUI()}try{await Notification.requestPermission()}catch(e){}syncNotifUI();notifPendientes()};
+
+/* =====================================================================
+   FACTURAS (análisis en el dispositivo)
+   ===================================================================== */
+let pdfjsReady=null;
+function loadScript(src){return new Promise((res,rej)=>{const s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s)})}
+function getPdfJs(){if(pdfjsReady)return pdfjsReady;
+  pdfjsReady=loadScript('vendor/pdf.min.js').then(()=>{pdfjsLib.GlobalWorkerOptions.workerSrc='vendor/pdf.worker.min.js'})
+   .catch(()=>loadScript('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js').then(()=>{pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'}))
+   .then(()=>window.pdfjsLib);return pdfjsReady}
+async function pdfText(file){const lib=await getPdfJs();const doc=await lib.getDocument({data:await file.arrayBuffer()}).promise;let out='';
+  for(let p=1;p<=Math.min(doc.numPages,8);p++){const pg=await doc.getPage(p);const tc=await pg.getTextContent();
+    const rows={};tc.items.forEach(it=>{if(!it.str.trim())return;const y=Math.round(it.transform[5]/3);(rows[y]=rows[y]||[]).push(it)});
+    Object.keys(rows).map(Number).sort((a,b)=>b-a).forEach(y=>{out+=rows[y].sort((a,b)=>a.transform[4]-b.transform[4]).map(i=>i.str).join(' ').replace(/\s+/g,' ')+'\n'});out+='\n'}
+  return out}
+
+const NUM='(\\d{1,3}(?:\\.\\d{3})+(?:,\\d{1,4})?|\\d+,\\d{1,4}|\\d+\\.\\d{1,2}(?!\\d)|\\d+)';
+const toNum=s=>{if(s==null)return null;s=String(s).replace(/\s/g,'');if(s.includes(','))s=s.replace(/\./g,'').replace(',','.');else if(/^\d{1,3}(\.\d{3})+$/.test(s))s=s.replace(/\./g,'');return parseFloat(s)};
+const EURO_RE=()=>new RegExp('(-\\s*)?'+NUM+'\\s*(?:€|EUR\\b|euros)(?!\\s*\\/)','gi');
+function euros(str){const re=EURO_RE();const r=[];let m;while((m=re.exec(str)))r.push((m[1]?-1:1)*toNum(m[2]));return r}
+function lastEuro(str){const r=euros(str);return r.length?r[r.length-1]:null}
+
+const CONCEPTOS={
+ luz:[
+  ['excedentes',/compensaci[oó]n( de)? excedentes|excedentes|autoconsumo/i,'Compensación solar','Descuento por la energía de tus placas que vertiste a la red. Resta de la factura.'],
+  ['bono',/bono social/i,'Financiación bono social','Aportación obligatoria que pagan todos los clientes para financiar el bono social. Suele ser poca cosa.'],
+  ['impuesto',/impuesto (especial )?(sobre la )?electricidad|impuesto el[eé]ctrico/i,'Impuesto sobre la electricidad','Impuesto especial que se calcula como un porcentaje de lo que pagas por potencia y energía.'],
+  ['alquiler',/alquiler/i,'Alquiler del contador','Lo que te cobran por alquilar el contador. Si el contador es tuyo, no deberías pagarlo.'],
+  ['potencia',/t[eé]rmino (fijo )?de potencia|facturaci[oó]n (por|de la) potencia|por potencia contratada|^\s*potencia\b/i,'Potencia contratada','Parte fija: pagas por tener disponibles los kW contratados, consumas o no.'],
+  ['energia',/t[eé]rmino (variable )?de energ[ií]a|energ[ií]a (consumida|activa)|facturaci[oó]n (por|de la) energ[ií]a|consumo de (energ[ií]a|electricidad)|^\s*energ[ií]a\b/i,'Energía consumida','Parte variable: los kWh que realmente gastaste multiplicados por su precio.'],
+  ['servicios',/servicios? (adicionales|de mantenimiento)|mantenimiento|asistencia|seguro/i,'Servicios añadidos','Servicios extra (mantenimiento, asistencia, seguros…) que no son luz. Revisa si los quieres.',true],
+  ['indirecto',/\b(IGIC|IVA)\b/i,'IVA / IGIC','Impuesto general: IVA en la península y Baleares, IGIC en Canarias.']],
+ gas:[
+  ['hidrocarburos',/hidrocarburos/i,'Impuesto de hidrocarburos','Impuesto especial sobre el gas consumido.'],
+  ['alquiler',/alquiler/i,'Alquiler del contador','Alquiler del contador de gas.'],
+  ['fijo',/t[eé]rmino fijo|cuota fija/i,'Término fijo','Parte fija que pagas cada día por estar conectado, consumas o no.'],
+  ['variable',/t[eé]rmino variable|energ[ií]a consumida|consumo de gas|^\s*consumo\b/i,'Gas consumido','Lo que pagas por el gas que realmente gastaste (en kWh).'],
+  ['servicios',/mantenimiento|servicios? adicionales|asistencia|revisi[oó]n/i,'Servicios añadidos','Mantenimientos o seguros contratados aparte.',true],
+  ['indirecto',/\b(IGIC|IVA)\b/i,'IVA / IGIC','Impuesto general sobre el total.']],
+ agua:[
+  ['cuota',/cuota (fija|de servicio|de abono|de disponibilidad)|t[eé]rmino fijo|m[ií]nimo/i,'Cuota fija','Lo que pagas por tener el servicio, aunque no gastes agua.'],
+  ['alcantarillado',/alcantarillado|saneamiento/i,'Alcantarillado','Por recoger y llevar el agua sucia por la red de desagüe.'],
+  ['depuracion',/depuraci[oó]n/i,'Depuración','Por limpiar el agua residual antes de devolverla al medio.'],
+  ['canon',/canon/i,'Canon','Tasa autonómica o municipal ligada al agua.'],
+  ['basura',/basura|residuos/i,'Basura','Tasa de recogida de residuos que algunos municipios cobran en el recibo del agua.'],
+  ['contador',/contador|conservaci[oó]n/i,'Contador','Alquiler o mantenimiento del contador.'],
+  ['consumo',/abastecimiento|suministro de agua|consumo de agua|t[eé]rmino variable|^\s*consumo\b/i,'Agua consumida','Los metros cúbicos que gastaste, normalmente por tramos: cuanto más gastas, más caro cada m³.'],
+  ['indirecto',/\b(IGIC|IVA)\b/i,'IVA / IGIC','Impuesto general sobre el recibo.']],
+ tel:[
+  ['tarificacion',/tarificaci[oó]n adicional|servicios? premium|sms premium|\b(803|806|807|905)\b/i,'Tarificación adicional','Llamadas o SMS a números especiales de pago. Suelen ser altas no deseadas o suscripciones.',true],
+  ['terceros',/terceros|suscripci[oó]n|contenidos digitales|compras/i,'Compras y suscripciones','Pagos a terceros cargados en tu factura (apps, juegos, servicios). Revisa si los reconoces.',true],
+  ['roaming',/roaming|itinerancia/i,'Roaming','Uso del móvil fuera de la UE o fuera de tarifa.',true],
+  ['equipos',/terminal|financiaci[oó]n|plazos?|router|dispositivo/i,'Móvil o equipo a plazos','Cuota del teléfono u otro aparato que estás pagando a plazos.'],
+  ['descuentos',/descuento|promoci[oó]n|bonificaci[oó]n/i,'Descuentos','Promociones aplicadas. Ojo con la fecha en que terminan.'],
+  ['llamadas',/llamadas|sms|minutos/i,'Llamadas y SMS fuera de tarifa','Consumo que no entra en tu tarifa plana.',true],
+  ['cuota',/cuota|tarifa|paquete|fibra|m[oó]vil|l[ií]nea/i,'Cuota de la tarifa','Lo que pagas cada mes por tu tarifa (fibra, móvil, TV…).'],
+  ['indirecto',/\b(IGIC|IVA)\b/i,'IVA / IGIC','Impuesto general sobre la factura.']]
+};
+const EMPRESAS=['Endesa','Energía XXI','Iberdrola','Curenergía','Naturgy','Repsol','TotalEnergies','Holaluz','Octopus','Som Energia','Lucera','Factor Energía','Audax','Plenitude','EDP','Ganaenergía','Teidagua','Emmasa','Canaragua','Aqualia','Canal de Isabel II','Movistar','Vodafone','Orange','MásMóvil','Masmovil','Yoigo','Digi','Pepephone','Lowi','O2','Simyo','Jazztel','Finetwork','Avatel','Lebara'];
+const TIPO_INFO={luz:{n:'Luz',s:'Luz',i:'zap',c:'t-amb'},gas:{n:'Gas',s:'Gas',i:'flame',c:'t-ora'},agua:{n:'Agua',s:'Agua',i:'drop',c:'t-blu'},tel:{n:'Teléfono e internet',s:'Teléfono',i:'phone',c:'t-vio'}};
+
+function detectarTipo(t){const s=t.toLowerCase();const sc={luz:0,gas:0,agua:0,tel:0};
+  const add=(k,re,w=1)=>{const m=s.match(re);if(m)sc[k]+=w*Math.min(m.length,6)};
+  add('luz',/kwh/g);add('luz',/t[eé]rmino de potencia|potencia contratada/g,3);add('luz',/impuesto (especial )?(sobre la )?electricidad/g,4);add('luz',/\bcups\b/g);add('luz',/peajes?|2\.0td|pvpc/g,2);
+  add('gas',/gas natural|hidrocarburos|\bglp\b|propano/g,4);
+  add('agua',/m3|m³/g);add('agua',/alcantarillado|saneamiento|depuraci[oó]n|abastecimiento/g,3);add('agua',/\bagua\b/g);
+  add('tel',/fibra|m[oó]vil|l[ií]neas?\b|\bgb\b|roaming|llamadas|\bsms\b|router/g,2);
+  const best=Object.entries(sc).sort((a,b)=>b[1]-a[1])[0];return best[1]>0?best[0]:null}
+function buscarTotal(lines,text){const res=[/total\s*(a\s*pagar|factura|importe|recibo|a\s*cargar)/i,/importe\s*(total|a\s*pagar|de\s*la\s*factura)/i,/^\s*total\b/i];
+  for(const r of res)for(const ln of lines)if(r.test(ln)){const v=lastEuro(ln);if(v!=null&&v>0)return v}
+  const m=text.match(new RegExp('total[\\s\\S]{0,80}?'+NUM+'\\s*(?:€|EUR)','i'));return m?toNum(m[1]):null}
+const DATE='(\\d{1,2}[\\/.-]\\d{1,2}[\\/.-]\\d{2,4})';
+function toISO(s){const p=s.split(/[\/.-]/).map(Number);let y=p[2];if(y<100)y+=2000;const d=new Date(y,p[1]-1,p[0]);return isNaN(d)?null:iso(d)}
+function buscarPeriodo(text){const m=text.match(new RegExp(DATE+'\\s*(?:a|al|-|–|hasta)\\s*'+DATE,'i'));let desde=null,hasta=null,dias=null;
+  if(m){desde=toISO(m[1]);hasta=toISO(m[2]);if(desde&&hasta)dias=Math.round((parseISO(hasta)-parseISO(desde))/864e5)+1}
+  const d2=text.match(/(\d{1,3})\s*d[ií]as/i);if(d2&&(!dias||dias<1||dias>400))dias=+d2[1];return{desde,hasta,dias:dias>0&&dias<400?dias:null}}
+function analizar(text){
+  const lines=text.split(/\n+/).map(l=>l.trim()).filter(Boolean);const tipo=detectarTipo(text);if(!tipo)return null;
+  const used=new Set();const conceptos=[];
+  for(const [key,re,nom,exp,flag] of CONCEPTOS[tipo]){let val=null;
+    for(let i=0;i<lines.length;i++){if(used.has(i)||!re.test(lines[i]))continue;if(/total/i.test(lines[i])&&key!=='indirecto')continue;const v=lastEuro(lines[i]);if(v!=null){val=(val||0)+v;used.add(i);if(key!=='descuentos'&&key!=='excedentes')break}}
+    if(val!=null&&Math.abs(val)>=0.01)conceptos.push({key,nom,exp,val:(key==='descuentos'||key==='excedentes')?-Math.abs(val):val,flag:!!flag})}
+  const total=buscarTotal(lines,text);const per=buscarPeriodo(text);
+  const empresa=EMPRESAS.find(e=>new RegExp('\\b'+e.replace(/\s/g,'\\s')+'\\b','i').test(text))||null;
+  const x={};
+  if(tipo==='luz'){let m=text.match(/potencia\s+contratada[^0-9\n]{0,40}?(\d+(?:[.,]\d+)?)\s*kW(?!h)/i)||text.match(/\bP1[^0-9\n]{0,15}(\d+(?:[.,]\d+)?)\s*kW(?!h)/i);if(m)x.kw=toNum(m[1]);
+    m=text.match(/(?:consumo|energ[ií]a consumida|total consumo)[^\n]{0,60}?(\d{1,3}(?:\.\d{3})*(?:,\d+)?|\d+(?:,\d+)?)\s*kWh/i);if(m)x.kwh=toNum(m[1]);
+    m=text.match(/ES\d{16}[A-Z]{2}(?:\d[FPCRXYZ])?/);if(m)x.cups=m[0];x.pvpc=/pvpc|precio voluntario/i.test(text)}
+  if(tipo==='gas'){const m=text.match(/(\d{1,3}(?:\.\d{3})*(?:,\d+)?|\d+)\s*kWh/i);if(m)x.kwh=toNum(m[1])}
+  if(tipo==='agua'){const m=text.match(/consumo[^\n\d]{0,40}(\d+(?:[.,]\d+)?)\s*(?:m3|m³)/i)||text.match(/(?:total|facturado)[^\n\d]{0,40}(\d+(?:[.,]\d+)?)\s*(?:m3|m³)/i)||text.match(/(\d+(?:[.,]\d+)?)\s*(?:m3|m³)\s*x/i);if(m)x.m3=toNum(m[1])}
+  const perm=text.match(new RegExp('(?:permanencia|promoci[oó]n)[^\\n]{0,80}?'+DATE,'i'));if(perm)x.finPerm=toISO(perm[1]);
+  return{id:uid(),tipo,empresa,total,...per,conceptos,x,creada:iso(today())}}
+
+function consejos(f,prev){const T=[];const d=f.dias,tot=f.total;const c=k=>f.conceptos.find(z=>z.key===k);const w=s=>({w:1,s});
+  if(tot&&d)T.push(`Te sale a <b>${eur(tot/d)} al día</b>, unos <b>${eur(tot/d*30.4)} al mes</b>.`);
+  if(prev&&prev.total&&prev.dias&&tot&&d){const a=tot/d,b=prev.total/prev.dias,p=(a-b)/b*100;if(Math.abs(p)>=3)T.push(p>0?w(`Pagas un <b>${nfmt(p)}% más</b> al día que en la factura anterior (${fmtDate(prev.hasta||prev.creada)}).`):`Pagas un <b>${nfmt(-p)}% menos</b> al día que en la factura anterior (${fmtDate(prev.hasta||prev.creada)}).`)}
+  if(f.tipo==='luz'){
+    if(f.x.kwh&&tot)T.push(tot/f.x.kwh>0.25?w(`Precio real medio, con fijos e impuestos: <b>${nfmt(tot/f.x.kwh,3)} €/kWh</b>. Es alto: compara tarifas o revisa la potencia.`):`Precio real medio, con fijos e impuestos: <b>${nfmt(tot/f.x.kwh,3)} €/kWh</b>.`);
+    const e=c('energia');if(e&&f.x.kwh)T.push(`Solo la energía te cuesta <b>${nfmt(e.val/f.x.kwh,3)} €/kWh</b>. Es el número que debes comparar entre ofertas.`);
+    const p=c('potencia');if(p&&f.x.kw&&d){T.push(`Cada kW contratado te cuesta unos <b>${eur(p.val/f.x.kw/d*365)} al año</b>. Si nunca te salta el automático, bajar potencia puede compensar.`);
+      if(tot&&p.val/tot>0.35)T.push(w('Más de un tercio de tu factura es fijo (potencia). Con tan poco consumo, la potencia es lo que más pesa.'))}
+    if(c('alquiler'))T.push('Pagas alquiler de contador. Si algún día compras el tuyo, este concepto desaparece.');
+    if(c('servicios'))T.push(w('Tienes servicios añadidos (mantenimiento, seguros…). Comprueba que los contrataste y que te compensan.'));
+    if(f.x.pvpc)T.push('Estás en tarifa regulada (PVPC): el precio cambia cada hora. Pon lavadora y lavavajillas en horas valle.');
+    if(c('excedentes'))T.push(`Tus placas te han descontado <b>${eur(Math.abs(c('excedentes').val))}</b> en esta factura.`)}
+  if(f.tipo==='agua'&&f.x.m3&&d){T.push(`En casa gastáis unos <b>${nfmt(f.x.m3*1000/d)} litros al día</b>. Divide entre las personas que vivís: la referencia en España ronda los 130 litros por persona y día.`);
+    if(tot)T.push(`Cada m³ te sale a <b>${eur(tot/f.x.m3)}</b> contando todo.`);if(c('basura'))T.push('En este recibo también va la tasa de basura del ayuntamiento.')}
+  if(f.tipo==='gas'&&f.x.kwh&&tot)T.push(`Precio medio del gas con todo incluido: <b>${nfmt(tot/f.x.kwh,3)} €/kWh</b>.`);
+  if(f.tipo==='tel'){const fl=f.conceptos.filter(z=>z.flag&&z.val>0);if(fl.length)T.push(w(`Hay <b>${eur(fl.reduce((s,z)=>s+z.val,0))}</b> en cargos fuera de tu tarifa (${fl.map(z=>z.nom.toLowerCase()).join(', ')}). Si no los reconoces, reclama a tu operador y pide que bloquee los servicios de tarificación adicional.`));
+    if(c('descuentos'))T.push(w('Tienes descuentos aplicados. Cuando terminen, la factura subirá: crea un aviso para revisarlo antes.'))}
+  if(f.x.finPerm)T.push(w(`Hay una fecha de permanencia o fin de promoción: <b>${fmtDate(f.x.finPerm)}</b>. Crea un aviso para negociar o cambiarte antes.`));
+  return T}
+
+function ahorros(f){const d=f.dias,c=k=>f.conceptos.find(z=>z.key===k),A=[];if(!d)return A;const an=v=>v/d*365;
+  const sv=c('servicios');if(sv&&sv.val>0)A.push({t:'Dar de baja los servicios añadidos que no uses',v:an(sv.val)});
+  const p=c('potencia');if(f.tipo==='luz'&&p&&f.x.kw>=3.45)A.push({t:'Bajar 1 kW de potencia, si nunca te salta el automático',v:an(p.val/f.x.kw)});
+  if(f.tipo==='tel'){const x=f.conceptos.filter(z=>z.flag&&z.val>0).reduce((s,z)=>s+z.val,0);if(x>0)A.push({t:'Quitar los cargos fuera de tarifa, si se repiten cada mes',v:an(x)})}
+  return A.filter(a=>a.v>=1)}
+async function mostrarFactura(f,guardada){
+  if(!f){$('#resultado').innerHTML=`<div class="card empty"><span class="tile t-amb">${ic('alert')}</span><h3>No hemos reconocido esta factura</h3><p>Puede que sea un PDF escaneado o un formato que aún no conocemos. Prueba a pegar el texto de la factura.</p></div>`;return}
+  const H=(await Store.all('facturas')).filter(h=>h.tipo===f.tipo&&h.id!==f.id).sort((a,b)=>(b.hasta||b.creada).localeCompare(a.hasta||a.creada));
+  const prev=H.find(h=>(h.hasta||h.creada)<(f.hasta||f.creada))||null;
+  const ti=TIPO_INFO[f.tipo];const tot=f.total;const sumC=f.conceptos.reduce((s,c)=>s+c.val,0);
+  const rows=[...f.conceptos];if(tot&&tot-sumC>0.5)rows.push({nom:'Otros conceptos',exp:'Importes que el lector no ha clasificado (redondeos u otros cargos).',val:tot-sumC});
+  const max=Math.max(...rows.map(r=>Math.abs(r.val)),1);
+  const k=[];if(f.dias)k.push([f.dias+' días','Periodo']);if(tot&&f.dias)k.push([eur(tot/f.dias*30.4),'Al mes']);if(f.x.kwh)k.push([nfmt(f.x.kwh)+' kWh','Consumo']);if(f.x.kw)k.push([nfmt(f.x.kw,2)+' kW','Potencia']);if(f.x.m3)k.push([nfmt(f.x.m3,1)+' m³','Consumo']);
+  const tips=consejos(f,prev);
+  $('#resultado').innerHTML=`<div class="card">
+   <div class="row"><span class="tile ${ti.c}">${ic(ti.i)}</span><div class="grow"><b>${ti.n}${f.empresa?' · '+esc(f.empresa):''}</b><div class="mut small">${f.desde&&f.hasta?`Del ${fmtDate(f.desde)} al ${fmtDate(f.hasta)}`:'Periodo no detectado'}</div></div>${guardada?'<span class="chip neu">Guardada</span>':''}</div>
+   <div class="total">${eur(tot)}</div><div class="mut xs">Total de la factura</div>
+   ${k.length?`<div class="kpis">${k.map(([a,b])=>`<div class="kpi"><b>${a}</b><span>${b}</span></div>`).join('')}</div>`:''}</div>
+  ${(()=>{const A=ahorros(f);if(!A.length)return'';const t=A.reduce((s,a)=>s+a.v,0);return`<div class="card save"><div class="row"><span class="tile t-grn">${ic('trend')}</span><div class="grow"><div class="small" style="font-weight:600;color:var(--grn)">Ahorro posible</div><div class="big">≈ ${eur(t/12)} al mes</div></div></div><div class="small" style="color:var(--ink2)">Unos <b>${eur(t)} al año</b>, calculado con los importes de esta factura:</div><ul>${A.map(a=>`<li><span>${a.t}</span><b>${eur(a.v)}/año</b></li>`).join('')}</ul></div>`})()}
+  <div class="card"><b>¿Qué estás pagando?</b>
+   ${rows.length?rows.sort((a,b)=>b.val-a.val).map(r=>`<div class="bar ${r.val<0?'neg':''} ${r.flag?'warn':''}"><div class="lab"><span>${r.flag?ic('alert','width:15px;height:15px;vertical-align:-2px;margin-right:4px'):''}${esc(r.nom)}</span><b>${eur(r.val)}</b></div>
+   <div class="trk"><div class="fil" style="width:${Math.max(2,Math.abs(r.val)/max*100)}%"></div></div><div class="exp">${esc(r.exp)}${tot&&r.val>0?` · ${nfmt(r.val/tot*100)}% del total`:''}</div></div>`).join(''):'<p class="mut">No hemos podido separar los conceptos de esta factura.</p>'}</div>
+  <div class="card"><b>Lo que te conviene saber</b><ul class="tips" style="margin-top:6px">${tips.map(t=>typeof t==='object'?`<li class="w">${ic('alert')}<span>${t.s}</span></li>`:`<li>${ic('info')}<span>${t}</span></li>`).join('')||'<li>Sin observaciones.</li>'}</ul></div>
+  <div class="quick">${guardada?'':`<button class="btn pri" id="btnGuardarF">${ic('check')}Guardar</button>`}<button class="btn" id="btnAvisoF" ${guardada?'style="grid-column:1/-1"':''}>${ic('bell')}Crear aviso</button></div>`;
+  if(!guardada)$('#btnGuardarF').onclick=async()=>{await Store.put('facturas',f);toast('Guardada en el historial');renderHist();$('#btnGuardarF').disabled=true;$('#btnGuardarF').innerHTML=ic('check')+'Guardada'};
+  $('#btnAvisoF').onclick=()=>formAviso(null,{tipo:'contrato',nombre:`${ti.n}${f.empresa?' '+f.empresa:''}: revisar tarifa`,fecha:f.x.finPerm||addYears(iso(today()),1),aviso:30,notas:`Factura de ${eur(tot)}${f.dias?' por '+f.dias+' días':''}.`});
+  $('#resultado').scrollIntoView({behavior:'smooth',block:'start'})}
+
+async function renderHist(){const H=(await Store.all('facturas')).sort((a,b)=>(b.hasta||b.creada).localeCompare(a.hasta||a.creada));
+  $('#histCount').textContent=H.length?H.length+' guardada'+(H.length>1?'s':''):'';
+  $('#historial').innerHTML=H.length?H.map(h=>{const t=TIPO_INFO[h.tipo];return`<div class="hist"><span class="tile ${t.c}">${ic(t.i)}</span><div class="grow"><b class="small">${esc(h.empresa||t.n)}</b><div class="mut xs">${t.n} · ${fmtDate(h.hasta||h.creada)}</div></div>
+   <b class="small">${eur(h.total)}</b><button class="iconbtn" onclick="verFactura('${h.id}')" aria-label="Ver">${ic('eye')}</button><button class="iconbtn" style="color:var(--mut)" onclick="borrarFactura('${h.id}')" aria-label="Borrar">${ic('trash')}</button></div>`}).join('')
+   :`<div class="mut small" style="text-align:center;padding:8px">Guarda tus facturas para ver cómo evoluciona lo que pagas.</div>`}
+async function verFactura(id){const f=(await Store.all('facturas')).find(x=>x.id===id);if(f)mostrarFactura(f,true)}
+async function borrarFactura(id){if(await confirmDlg('Se borrará esta factura del historial.')){await Store.del('facturas',id);renderHist()}}
+async function procesarPdf(file){$('#resultado').innerHTML=`<div class="card mut row">${ic('receipt')}Leyendo la factura en tu dispositivo…</div>`;
+  try{const t=await pdfText(file);if(t.replace(/\s/g,'').length<40){$('#resultado').innerHTML=`<div class="card empty"><span class="tile t-amb">${ic('alert')}</span><h3>Este PDF parece una imagen escaneada</h3><p>Esta versión aún no lee facturas escaneadas. Descarga la factura original desde el área de cliente de tu compañía.</p></div>`;return}
+    mostrarFactura(analizar(t))}catch(e){console.error(e);$('#resultado').innerHTML=`<div class="card empty"><span class="tile t-red">${ic('x')}</span><h3>No se pudo abrir el PDF</h3><p>${esc(e.message||e)}</p></div>`}}
+const drop=$('#drop');drop.onclick=()=>$('#fPdf').click();
+$('#fPdf').onchange=e=>{const f=e.target.files[0];if(f)procesarPdf(f);e.target.value=''};
+['dragover','dragenter'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('over')}));
+['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('over')}));
+drop.addEventListener('drop',e=>{const f=e.dataTransfer.files[0];if(f&&f.type==='application/pdf')procesarPdf(f);else toast('Arrastra un archivo PDF')});
+$('#btnAnalizarTxt').onclick=()=>{const t=$('#txtFactura').value;if(t.trim().length<30)return toast('Pega el texto de la factura');mostrarFactura(analizar(t))};
+
+const EJEMPLOS={
+luz:`ELÉCTRICA DEMO S.L. Factura de electricidad
+Periodo de facturación: 01/09/2026 a 30/09/2026 (30 días)
+CUPS: ES0031000000000000AB1F
+Potencia contratada P1: 4,6 kW P2: 4,6 kW
+Tarifa de acceso 2.0TD
+Consumo total: 245 kWh
+Término de potencia 4,6 kW x 30 días x 0,0901 €/kW día 12,43 €
+Término de energía 245 kWh x 0,1420 €/kWh 34,79 €
+Financiación bono social 30 días x 0,0127 €/día 0,38 €
+Impuesto sobre la electricidad 5,11% s/ 47,60 € 2,43 €
+Alquiler de equipos de medida 30 días x 0,0266 €/día 0,80 €
+Servicio de mantenimiento hogar 4,95 €
+IGIC 0% 0,00 €
+TOTAL A PAGAR 55,78 €
+Permanencia hasta el 15/03/2027`,
+agua:`AGUAS DEMO - Recibo de agua
+Periodo: 01/07/2026 a 31/08/2026 (62 días)
+Lectura anterior 1.204 m3 Lectura actual 1.222 m3
+Consumo: 18 m3
+Cuota de servicio 9,60 €
+Abastecimiento bloque 1: 18 m3 x 0,65 €/m3 11,70 €
+Alcantarillado 18 m3 x 0,22 €/m3 3,96 €
+Depuración 18 m3 x 0,30 €/m3 5,40 €
+Conservación de contador 1,20 €
+IGIC 7% 2,24 €
+Total factura 34,10 €`,
+tel:`TELECO DEMO - Tu factura
+Periodo 01/10/2026 - 31/10/2026
+Cuota tarifa Fibra 600Mb + 2 líneas móvil 45,00 €
+Descuento promoción 12 meses -10,00 €
+Pago a plazos terminal (cuota 8 de 24) 15,00 €
+Servicios de tarificación adicional (SMS premium 25 a 1 número) 7,26 €
+Compras a terceros - suscripción contenidos 4,99 €
+Llamadas fuera de tarifa 1,35 €
+IVA 21% 13,22 €
+TOTAL FACTURA 76,82 €
+Fin de promoción: 31/01/2027`,
+gas:`GAS DEMO S.A. Factura de gas natural
+Periodo: 10/01/2026 a 09/03/2026 (59 días)
+Consumo: 1.180 kWh
+Término fijo 59 días x 0,1693 €/día 9,99 €
+Término variable 1.180 kWh x 0,0721 €/kWh 85,08 €
+Impuesto especial de hidrocarburos 1.180 kWh x 0,00234 €/kWh 2,76 €
+Alquiler de contador 59 días x 0,0204 €/día 1,20 €
+IVA 21% 20,88 €
+Importe total 119,91 €`};
+$$('[data-ej]').forEach(b=>b.onclick=()=>{$('#txtFactura').value=EJEMPLOS[b.dataset.ej];mostrarFactura(analizar(EJEMPLOS[b.dataset.ej]))});
+
+/* =====================================================================
+   JUEGO «APAGA LA LUZ»: niveles, rachas, reto diario y medallas (todo local)
+   ===================================================================== */
+const MEDALLAS=[{n:'Bronce',min:30,c:'#b0723a'},{n:'Plata',min:60,c:'#8e9aa3'},{n:'Oro',min:100,c:'#d4a017'},{n:'Leyenda',min:150,c:'#6b4fd6'}];
+const GS={best:0,days:{}};
+try{Object.assign(GS,JSON.parse(localStorage.getItem('apaga-luz')||'{}'));GS.best=Math.max(GS.best||0,+localStorage.getItem('apaga-best')||0)}catch(e){}
+function gSave(){try{localStorage.setItem('apaga-luz',JSON.stringify(GS))}catch(e){}}
+const retoDe=d=>{let h=0;for(const ch of d)h=(h*31+ch.charCodeAt(0))%9973;return 25+(h%5)*5};
+function racha(){let n=0;const d=today();if(!((GS.days[iso(d)]||0)>=retoDe(iso(d))))d.setDate(d.getDate()-1);
+  while((GS.days[iso(d)]||0)>=retoDe(iso(d))){n++;d.setDate(d.getDate()-1)}return n}
+function mejorSemana(){let m=0;const d=today();for(let k=0;k<7;k++){m=Math.max(m,GS.days[iso(d)]||0);d.setDate(d.getDate()-1)}return m}
+
+const G={n:16,on:new Set(),sun:-1,eur:0,score:0,lvl:1,combo:0,lastOff:0,run:false,t0:0,last:0,nextSpawn:0};
+$('#gGrid').innerHTML=Array.from({length:G.n},(_,i)=>`<button class="gB" data-i="${i}" aria-label="Bombilla ${i+1}">${ic('bulb')}</button>`).join('');
+const cells=$$('.gB');
+function gPaint(i){const c=cells[i];const s=G.sun===i;c.classList.toggle('on',G.on.has(i));c.classList.toggle('sun',s);c.innerHTML=ic(s?'sun':'bulb')}
+function gHud(){$('#gEur').textContent=Math.floor(G.eur);$('#gScore').textContent=G.score;$('#gLvl').textContent=G.lvl;$('#gFil').style.width=Math.min(100,G.eur)+'%';
+  $('#gCombo').textContent=G.combo>=3?`Racha ×${G.combo}`:'';$('#gBest').textContent=GS.best}
+function gPop(el,txt,cls=''){const g=$('#game'),r=el.getBoundingClientRect(),p=g.getBoundingClientRect();const s=document.createElement('div');s.className='pop '+cls;s.textContent=txt;s.style.left=(r.left-p.left+r.width/2-14)+'px';s.style.top=(r.top-p.top+4)+'px';g.appendChild(s);setTimeout(()=>s.remove(),700)}
+function gBanner(t,sub){const b=$('#gBanner');b.innerHTML=t+(sub?`<small>${sub}</small>`:'');b.classList.remove('show');void b.offsetWidth;b.classList.add('show')}
+function gSpawn(){const free=[...Array(G.n).keys()].filter(i=>!G.on.has(i)&&i!==G.sun);if(!free.length)return;const i=free[Math.random()*free.length|0];
+  if(G.sun<0&&Math.random()<0.06){G.sun=i;gPaint(i);setTimeout(()=>{if(G.sun===i){G.sun=-1;gPaint(i)}},1600);return}
+  G.on.add(i);gPaint(i)}
+function gLoop(ts){if(!G.run)return;const dt=Math.min(.1,(ts-(G.last||ts))/1000);G.last=ts;const el=(ts-G.t0)/1000;
+  const every=Math.max(.26,0.95-(G.lvl-1)*0.075-el*0.003);
+  if(ts>=G.nextSpawn){gSpawn();if(G.lvl>=5&&Math.random()<.25+G.lvl*.02)gSpawn();G.nextSpawn=ts+every*1000}
+  G.eur+=G.on.size*dt*(1.5+(G.lvl-1)*0.22);gHud();if(G.eur>=100)return gEnd();requestAnimationFrame(gLoop)}
+function gStart(){G.on.clear();G.sun=-1;G.eur=0;G.score=0;G.lvl=1;G.combo=0;G.lastOff=0;G.run=true;G.last=0;cells.forEach((_,i)=>gPaint(i));gHud();$('#gOver').classList.add('hidden');
+  requestAnimationFrame(ts=>{G.t0=ts;G.nextSpawn=ts+500;requestAnimationFrame(gLoop)})}
+function gOff(c,i){G.on.delete(i);G.score++;const now=performance.now();G.combo=now-G.lastOff<600?G.combo+1:1;G.lastOff=now;
+  gPaint(i);c.classList.remove('off');void c.offsetWidth;c.classList.add('off');gPop(c,G.combo>=3?`+1 ×${G.combo}`:'+1');
+  vib()
+  if(G.combo>0&&G.combo%10===0){G.eur=Math.max(0,G.eur-5);gBanner(`¡Racha de ${G.combo}!`,'Tu consumo baja 5 chispas')}
+  const nl=1+Math.floor(G.score/15);if(nl>G.lvl){G.lvl=nl;G.eur=Math.max(0,G.eur-10);gBanner(`¡Nivel ${nl}!`,'Premio: tu consumo baja 10 chispas');vib('ok')}
+  gHud()}
+cells.forEach(c=>c.addEventListener('pointerdown',e=>{e.preventDefault();if(!G.run)return;const i=+c.dataset.i;
+  if(G.sun===i){G.sun=-1;G.eur=Math.max(0,G.eur-15);gPaint(i);gPop(c,'−15 chispas','g');gHud();return}
+  if(G.on.has(i))gOff(c,i)}));
+
+function gIntro(){const r=retoDe(iso(today())),hoy=GS.days[iso(today())]||0;
+  $('#gOver').innerHTML=`<span class="tile t-amb" style="width:72px;height:72px;border-radius:22px">${ic('bulb','width:36px;height:36px')}</span>
+   <h2>Apaga la luz</h2><p class="lead">¿Cuántas bombillas puedes apagar antes de que salte el apagón?</p>
+   <ul class="gRules"><li><span class="tile t-amb">${ic('bulb')}</span><span>Toca las bombillas encendidas para apagarlas.</span></li>
+   <li><span class="tile t-red">${ic('zap')}</span><span>Cada bombilla encendida gasta <b>chispas</b>. Si llegas a 100, apagón y pierdes.</span></li>
+   <li><span class="tile t-blu">${ic('sun')}</span><span>Toca la placa solar y tu consumo baja 15 chispas.</span></li>
+   <li><span class="tile t-grn">${ic('trend')}</span><span>Cada 15 apagadas subes de nivel (más rápido) y tu consumo baja 10 chispas.</span></li></ul>
+   <button class="btn pri" style="min-width:180px;padding:13px 22px" id="gGo">Jugar</button>
+   <p class="mut xs" style="margin-top:12px">Reto de hoy: apagar ${r} bombillas${hoy>=r?' · ¡conseguido!':''}</p>`;
+  $('#gOver').classList.remove('hidden');$('#gGo').onclick=gStart}
+function gEnd(){G.run=false;const d=iso(today()),r=retoDe(d),antesHoy=GS.days[d]||0,antesBest=GS.best;
+  const rec=G.score>antesBest&&G.score>0;GS.best=Math.max(GS.best,G.score);GS.days[d]=Math.max(antesHoy,G.score);
+  const ks=Object.keys(GS.days).sort();while(ks.length>60)delete GS.days[ks.shift()];gSave();
+  const nuevas=MEDALLAS.filter(m=>antesBest<m.min&&G.score>=m.min);const retoOk=antesHoy<r&&G.score>=r;
+  vib('bad')
+  $('#gOver').innerHTML=`<span class="tile ${rec?'t-amb':'t-red'}" style="width:72px;height:72px;border-radius:22px">${ic(rec?'trophy':'zap','width:36px;height:36px')}</span>
+   <h2>${rec?'¡Nuevo récord!':'¡Apagón!'}</h2><p class="lead">${retoOk?'Has superado el reto de hoy.':G.score>=r?'Reto de hoy completado.':`Te faltaron ${r-G.score} para el reto de hoy (${r}).`}</p>
+   <div class="gStats"><div><b>${G.score}</b><span>Apagadas</span></div><div><b>${G.lvl}</b><span>Nivel</span></div><div><b>${GS.best}</b><span>Récord</span></div></div>
+   ${nuevas.length?`<p style="margin:0 0 14px;font-weight:700">Medalla nueva: ${nuevas.map(m=>m.n).join(', ')}</p>`:''}
+   <button class="btn pri" style="min-width:180px;padding:13px 22px" id="gGo">Jugar otra vez</button>`;
+  $('#gOver').classList.remove('hidden');$('#gGo').onclick=gStart;gHud();gPanels();if(current==='inicio')renderInicio()}
+function gPanels(){const d=iso(today()),r=retoDe(d),hoy=GS.days[d]||0,st=racha();
+  $('#gReto').innerHTML=`<div class="reto"><span class="tile ${hoy>=r?'t-grn':'t-amb'}">${ic(hoy>=r?'check':'trophy')}</span><div class="grow">
+   <b>Reto de hoy: apaga ${r} bombillas</b><div class="mut small">${hoy>=r?'¡Conseguido! Vuelve mañana para el siguiente.':`Tu mejor partida hoy: ${hoy}.`}${st?` · Racha: ${st} día${st>1?'s':''} seguidos`:''}</div>
+   <div class="bar2"><i style="width:${Math.min(100,hoy/r*100)}%"></i></div></div></div>`;
+  $('#gMedals').innerHTML=MEDALLAS.map(m=>`<div class="medal ${GS.best>=m.min?'':'lock'}"><div class="m" style="background:${m.c}">${m.min}</div>${m.n}</div>`).join('');
+  $('#gWeek').textContent=`Mejor de la semana: ${mejorSemana()}`}
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&G.run)gEnd()});
+gIntro();gPanels();gHud();
+
+/* =====================================================================
+   INICIO
+   ===================================================================== */
+async function renderInicio(){
+  const A=(await Store.all('avisos')).sort((a,b)=>(a.fecha+(a.hora||'')).localeCompare(b.fecha+(b.hora||'')));const F=(await Store.all('facturas')).sort((a,b)=>(b.hasta||b.creada).localeCompare(a.hasta||a.creada));
+  const pend=A.filter(a=>esPend(a)).sort((x,y)=>estado(x).d-estado(y).d),venc=A.filter(a=>estado(a).c==='red'&&!TT(a).cita);const next=A.find(a=>estado(a).c==='grn');
+  let st='';
+  if(venc.length)st=`<div class="status bad" onclick="go('avisos')"><span class="tile t-red">${ic('alert')}</span><div class="grow"><b>${venc.length===1?esc(venc[0].nombre)+': '+estado(venc[0]).t.toLowerCase():venc.length+' avisos vencidos'}</b><span class="small">${venc.length===1?'Revísalo y renuévalo':'Revísalos y renuévalos'} cuanto antes.</span></div>${ic('chev')}</div>`;
+  else if(pend.length)st=`<div class="status warn" onclick="go('avisos')"><span class="tile t-amb">${ic('bell')}</span><div class="grow"><b>${esc(pend[0].nombre)}: ${estado(pend[0]).t.toLowerCase()}</b><span class="small">${pend.length>1?`Y ${pend.length-1} aviso${pend.length>2?'s':''} más pendiente${pend.length>2?'s':''}.`:(TT(pend[0]).cita?'Que no se te pase.':'Es buen momento para renovarlo.')}</span></div>${ic('chev')}</div>`;
+  else if(next)st=`<div class="status" onclick="go('avisos')"><span class="tile t-grn">${ic('check')}</span><div class="grow"><b>Todo al día</b><span class="small mut">Próximo: ${esc(next.nombre)}, ${fmtDate(next.fecha)}.</span></div>${ic('chev')}</div>`;
+  $('#homeStatus').innerHTML=st;
+  const chip=(t,c='neu')=>`<span class="chip ${c}">${t}</span>`;
+  $('#metaAvisos').innerHTML=A.length?chip(`${A.length} aviso${A.length>1?'s':''}`)+(pend.length?chip(`${pend.length} pendiente${pend.length>1?'s':''}`,venc.length?'red':'amb'):chip('Todo al día','grn')):chip('Empieza aquí','grn');
+  $('#metaFacturas').innerHTML=F.length?chip(`Última: ${TIPO_INFO[F[0].tipo].s} ${eur(F[0].total)}`)+chip(`${F.length} guardada${F.length>1?'s':''}`):chip('Luz · agua · gas · teléfono');
+  {const r=retoDe(iso(today())),hoy=GS.days[iso(today())]||0,st=racha();$('#metaJuego').innerHTML=(hoy>=r?chip('Reto de hoy conseguido','grn'):chip(`Reto de hoy: ${r} bombillas`,'amb'))+(GS.best?chip(`Récord: ${GS.best}`):'')+(st>1?chip(`Racha: ${st} días`):'')}
+  $('#dotAvisos').textContent=pend.length;$('#dotAvisos').classList.toggle('hidden',!pend.length);$('#homeDot').textContent=pend.length;$('#homeDot').classList.toggle('hidden',!pend.length)}
+
+/* =====================================================================
+   AJUSTES
+   ===================================================================== */
+$('#btnExport').onclick=async()=>{const data={app:'al-dia',v:1,fecha:new Date().toISOString(),avisos:await Store.all('avisos'),facturas:await Store.all('facturas')};
+  await saveFile(`al-dia-copia-${iso(today())}.json`,JSON.stringify(data),'application/json')};
+$('#btnImport').onclick=()=>$('#fImport').click();
+$('#fImport').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(!['al-dia','papeles-de-casa'].includes(d.app))throw new Error();
+  for(const a of d.avisos||[])await Store.put('avisos',a);for(const x of d.facturas||[])await Store.put('facturas',x);toast(`Importados ${(d.avisos||[]).length} avisos y ${(d.facturas||[]).length} facturas`);renderAvisos();renderHist()}
+  catch(err){toast('Ese archivo no es una copia válida')}e.target.value=''};
+$('#btnBorrarTodo').onclick=async()=>{if(await confirmDlg('Se borrarán todos los avisos, facturas y adjuntos de este dispositivo. No se puede deshacer.','Borrar todo')){await Store.clear('avisos');await Store.clear('facturas');renderAvisos();renderHist();toast('Datos borrados')}};
+
+/* ---------- instalación PWA ---------- */
+let deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;
+  const b=document.createElement('button');b.className='btn sm pri';b.id='btnInstall';b.innerHTML=ic('download')+'Instalar';b.onclick=async()=>{deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;b.remove()};
+  if(current==='inicio'&&!$('#btnInstall'))$('#appbarIn .brand').after(b)});
+if(!NATIVE&&'serviceWorker'in navigator&&location.protocol!=='file:'){navigator.serviceWorker.register('sw.js').catch(()=>{})}
+
+/* ---------- integración nativa ---------- */
+if(NATIVE){
+  document.documentElement.classList.add('native');
+  $('#notifTxt').textContent='Te avisamos con una notificación unos días antes y el mismo día del vencimiento, aunque la app esté cerrada.';
+  $('#introAvisos div').innerHTML='Añade lo que caduca y <b>te avisaremos con una notificación</b> antes de que venza, aunque no abras la app.';
+  APP.addListener('backButton',()=>{if($('#modal').classList.contains('on'))return closeModal();if(current!=='inicio')return go('inicio');APP.exitApp()});
+  APP.addListener('appStateChange',s=>{if(s.isActive){renderAvisos();if(current==='inicio')renderInicio()}});
+  LN.addListener('localNotificationActionPerformed',e=>{go((e.notification&&e.notification.extra&&e.notification.extra.v)||'avisos')});
+  const setBar=()=>{try{SB.setStyle({style:matchMedia('(prefers-color-scheme: dark)').matches?'DARK':'LIGHT'})}catch(e){}};setBar();matchMedia('(prefers-color-scheme: dark)').addEventListener('change',setBar);
+}
+
+/* ---------- arranque ---------- */
+(async()=>{await Store.init();show(location.hash.slice(1)||'inicio');await renderAvisos();await renderHist();renderInicio();syncNotifUI();if(NATIVE)syncNotifs().then(syncNotifUI);else notifPendientes();})();
+</script>
+</body>
+</html>
