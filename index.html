@@ -109,6 +109,13 @@ main{max-width:760px;margin:0 auto;padding:6px 16px calc(var(--tab) + var(--safe
 .t-pri{background:var(--priS);color:var(--pri)}.t-blu{background:var(--bluS);color:var(--blu)}.t-ora{background:var(--oraS);color:var(--ora)}.t-vio{background:var(--vioS);color:var(--vio)}.t-sla{background:var(--slaS);color:var(--sla)}.t-amb{background:var(--ambS);color:var(--amb)}.t-red{background:var(--redS);color:var(--red)}.t-grn{background:var(--grnS);color:var(--grn)}
 
 /* inicio */
+.heromore{margin-top:2px}
+.heromore summary{list-style:none;display:inline-flex;align-items:center;gap:4px;cursor:pointer;color:var(--pri);font-weight:600;font-size:calc(14.5px * var(--fs,1));padding:4px 0}
+.heromore summary::-webkit-details-marker{display:none}
+.heromore summary svg.i{width:16px;height:16px;transform:rotate(90deg);transition:transform .2s}
+.heromore[open] summary svg.i{transform:rotate(-90deg)}
+.heromore p{margin:4px 0 0;animation:fade .2s ease}
+
 .hero{padding:10px 2px 4px}
 .hero h2{font-size:calc(27px * var(--fs,1));line-height:1.15;letter-spacing:-.8px;margin:6px 0 8px;font-weight:750}
 .hero p{margin:0;color:var(--ink2);font-size:calc(15.5px * var(--fs,1))}
@@ -377,7 +384,7 @@ a{color:var(--pri)}
     <div class="hero">
       <span class="pill"><svg class="i"><use href="#i-lock"/></svg>Privado · sin cuentas · sin nube</span>
       <h2>Tus gestiones de casa,<br>siempre al día.</h2>
-      <p>Te avisa antes de que caduque una garantía, el seguro o la ITV, te recuerda las citas médicas y la caducidad de tus medicinas, y te explica en cristiano lo que pagas en la luz, el agua, el gas o el teléfono.</p>
+      <details class="heromore"><summary><span>¿Qué hace Al Día?</span><svg class="i"><use href="#i-chev"/></svg></summary><p>Te avisa antes de que caduque una garantía, el seguro o la ITV, te recuerda las citas médicas y la caducidad de tus medicinas, y te explica en cristiano lo que pagas en la luz, el agua, el gas o el teléfono.</p></details>
     </div>
     <div id="homeStatus"></div>
 
