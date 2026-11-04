@@ -6,12 +6,14 @@
 <meta name="application-name" content="Al Día">
 <meta name="apple-mobile-web-app-title" content="Al Día">
 <meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="description" content="Al Día · Tus gestiones de casa, siempre al día: garantías, seguros, ITV, citas médicas, medicinas y facturas explicadas. Sin cuentas ni nube: todo se queda en tu dispositivo.">
 <title>Al Día · Gestiones de casa</title>
 <script>
 /* Apariencia guardada: se aplica antes de pintar para evitar parpadeos */
 window.ACENTOS={verde:['#1b6b52','#4cc497'],azul:['#2457c5','#8fb0ff'],turquesa:['#0e7490','#5fd3e8'],morado:['#5b45c7','#b5a8ff'],rosa:['#b0306a','#ff8fc0'],naranja:['#c25412','#ffab7a'],grafito:['#3f4a52','#b2c0cb']};
-window.aplicarApariencia=function(ap){const r=document.documentElement;ap=Object.assign({tema:'auto',color:'verde',fs:1,is:1},ap||{});
+window.aplicarApariencia=function(ap){const r=document.documentElement;ap=Object.assign({tema:'claro',color:'verde',fs:1,is:1},ap||{});
   r.classList.toggle('dark',ap.tema==='oscuro');r.classList.toggle('light',ap.tema==='claro');
   const osc=ap.tema==='oscuro'||(ap.tema==='auto'&&matchMedia('(prefers-color-scheme: dark)').matches);
   const c=(ACENTOS[ap.color]||ACENTOS.verde)[osc?1:0];
@@ -1094,7 +1096,7 @@ function pintarAp(){
   $$('#apColores button').forEach(b=>b.onclick=()=>{AP.color=b.dataset.c;cambiarAp()});
   $$('#apariencia [data-ap]').forEach(g=>{const k=g.dataset.ap;g.querySelectorAll('button').forEach(b=>{b.classList.toggle('on',String(AP[k])===b.dataset.v);b.onclick=()=>{AP[k]=k==='tema'?b.dataset.v:+b.dataset.v;cambiarAp()}})})}
 function cambiarAp(){AP=aplicarApariencia(AP);guardarAp();pintarAp();if(typeof setBarNativa==='function')setBarNativa()}
-$('#apReset').onclick=()=>{AP={tema:'auto',color:'verde',fs:1,is:1};cambiarAp();toast('Apariencia restablecida')};
+$('#apReset').onclick=()=>{AP={tema:'claro',color:'verde',fs:1,is:1};cambiarAp();toast('Apariencia restablecida')};
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{if(AP.tema==='auto')cambiarAp()});
 pintarAp();
 
